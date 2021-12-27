@@ -35,10 +35,10 @@ Welcome to my landing page for my individual assignment.
 <div class="col-sm-6">
 ![](images/ProjectHlynsson.jpg){width=150px align="right"}
 
-</div>
 
 
-<div class="col-sm-6">
+
+
 <br><br><br>
 `r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
 </div>

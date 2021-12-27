@@ -25,17 +25,14 @@ The slides for this assignment are embedded in the [**Slides**](https://jonhlyns
 
 <div class="col-sm-6">
 
-
+<hr>
 ### Project Hlynsson is also live at [YouTube](https://www.youtube.com/channel/UC8KVPSlpugcmWHFQYSAD4eA)
 
 
 
 ![](images/ProjectHlynsson.jpg){width=150px align="right"}
 
-</div>
 
-
-<div class="col-sm-6">
 <br><br><br>
 `r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
 </div>
