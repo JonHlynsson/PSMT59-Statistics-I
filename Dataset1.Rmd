@@ -224,7 +224,7 @@ psych::describe(d)
 
 ## Replication analysis
 
-An interaction plot can be produced to replicate @vanhedgerCricketChirpsCar2019's results, see figure 1.1. It should be noted that @vanhedgerCricketChirpsCar2019 perform perform two analysis's; (a) an ANOVA with all participants, and (b) an ANOVA with naive participants only^[Relevant ANOVA descriptives can be found in supplementary table 1.].
+An interaction plot can be produced to replicate @vanhedgerCricketChirpsCar2019's results, see figure 1.1. It should be noted that @vanhedgerCricketChirpsCar2019 perform perform two analysis's; (a) an ANOVA with all participants, and (b) an ANOVA with naïve participants only^[Relevant ANOVA descriptives can be found in supplementary table 1.].
 
 
 ```{r supplementary table 1, include=F}
@@ -250,8 +250,8 @@ dstat %>% kable(digits = 2,
 
 
 ```{r, echo=F, fig.cap="Effects plot replicating @vanhedgerCricketChirpsCar2019", results='hide', fig.show="hold", out.width="75%", fig.align='center'}
-## First I need to define a new dataset with only the naive participants
-## new dataset with only naive ----
+## First I need to define a new dataset with only the naïve participants
+## new dataset with only naïve ----
 # First select all cases where guessed purpose = No from dataset d
 # but exclude the variables made for full set 
 n_d <- d[d$guessed_purpose=="No", ] %>% select(id, guessed_purpose, bds, dnb, testing, soundscape_type)
@@ -287,7 +287,7 @@ plot_naive <- ggline(n_d, x = "testing", y = "CogTest", color = "soundscape_type
                add = c("mean_se"),
                palette = c("#058d18", "#cf5474"),
                ggtheme = theme_pubr(),
-               main = "Naive participants", 
+               main = "Naïve participants", 
                xlab = "Time",
                ylab = "Compostite score (z)",
                ylim = range(-0.4, 0.6),
@@ -304,7 +304,7 @@ figure1 <- ggarrange(plot_full, plot_naive, common.legend = TRUE,
 figure1
 ```
 
-As figure 1.1 shows, there seems to be an interaction between time of testing (i.e., pre-test and post-test) and the trend does not appear to differ substantially depending on whether or not the participants were naive to the hypothesis of the experiment.
+As figure 1.1 shows, there seems to be an interaction between time of testing (i.e., pre-test and post-test) and the trend does not appear to differ substantially depending on whether or not the participants were naïve to the hypothesis of the experiment. However, there appears to be more uncertainty in the naïve group in the interaction plot – if the standard errors can be interpretated to represent uncertainty 
 <br><br>
 
 ```{r Additional anlysis to replicate the ANOVA results from the paper, include=FALSE, results='hide'}
@@ -373,7 +373,7 @@ round(crudePosterior[-3, ], 2)
 #------------------ purpose of the experiment
 d2$guessed_purpose <- factor(d2$guessed_purpose, 
                              levels = c("1", "0"),
-                             labels = c("Not-naive", "Naive"))  
+                             labels = c("Not-naïve", "Naïve"))  
 adjusted <- stan_glm(CogTest ~ soundscape_type + guessed_purpose, 
                      data = d2, 
                      refresh = F, 
@@ -386,7 +386,7 @@ round(posterior_interval(adjusted, prob = .89), 2)
 Models <- rbind(crude=round(posterior_interval(crude, prob = .89), 2), 
                 adjusted=round(posterior_interval(adjusted, prob = .89), 2))
 row.names(Models) <- c("Intercept", "Soundscape Natural", "Sigma", 
-                       "Intercept", "Soundscape Natural", "Naive", "Sigma")
+                       "Intercept", "Soundscape Natural", "Naïve", "Sigma")
 Models[c(1,2,4,5,6), ] # sanity check to see how output looks like without sigma
 
 ```
@@ -408,7 +408,7 @@ The data is most compatible with ranges from 0.20 to 0.74, given our data and st
 
 $\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}$ is a crude model and doesn't account for participant nativity. Thus a model with nativity and soundscape type could add accuracy to the predictions^[i.e., $\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\:+\:\mathrm{Participant\:Nativity}$].
 
-However, it's necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those whom were naive to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models.
+However, it's necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those whom were naïve to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models.
 <br><br>
 
 ### Posterior distribution plots

@@ -267,7 +267,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">MyLabJournal</a>
+      <a class="navbar-brand" href="index.html">Individual assignment</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -275,10 +275,13 @@ $(document).ready(function () {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="Dataset1-25-dec.html">The paper</a>
+  <a href="Dataset1.html">The paper</a>
 </li>
 <li>
   <a href="Links.html">Links</a>
+</li>
+<li>
+  <a href="slides.html">The slides</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -562,14 +565,14 @@ Guessed purpose of experiment
 </div>
 <div id="replication-analysis" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Replication analysis</h2>
-<p>An interaction plot can be produced to replicate <span class="citation">Van Hedger et al. (2019)</span>’s results, see figure 1.1. It should be noted that <span class="citation">Van Hedger et al. (2019)</span> perform perform two analysis’s; (a) an ANOVA with all participants, and (b) an ANOVA with naive participants only<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
+<p>An interaction plot can be produced to replicate <span class="citation">Van Hedger et al. (2019)</span>’s results, see figure 1.1. It should be noted that <span class="citation">Van Hedger et al. (2019)</span> perform perform two analysis’s; (a) an ANOVA with all participants, and (b) an ANOVA with naïve participants only<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
-<img src="Dataset1-25-dec_files/figure-html/unnamed-chunk-2-1.png" alt="Effects plot replicating @vanhedgerCricketChirpsCar2019" width="75%" />
+<img src="Dataset1_files/figure-html/unnamed-chunk-2-1.png" alt="Effects plot replicating @vanhedgerCricketChirpsCar2019" width="75%" />
 <p class="caption">
 Figure 1.1: Effects plot replicating <span class="citation">Van Hedger et al. (2019)</span>
 </p>
 </div>
-<p>As figure 1.1 shows, there seems to be an interaction between time of testing (i.e., pre-test and post-test) and the trend does not appear to differ substantially depending on whether or not the participants were naive to the hypothesis of the experiment.
+<p>As figure 1.1 shows, there seems to be an interaction between time of testing (i.e., pre-test and post-test) and the trend does not appear to differ substantially depending on whether or not the participants were naïve to the hypothesis of the experiment. However, there appears to be more uncertainty in the naïve group in the interaction plot – if the standard errors can be interpretated to represent uncertainty
 <br><br></p>
 </div>
 <div id="bayesian-replication" class="section level2" number="1.3">
@@ -647,7 +650,7 @@ Soundscape Natural
 </tr>
 <tr>
 <td style="text-align:left;padding-left: 2em;" indentlevel="1">
-Naive
+Naïve
 </td>
 <td style="text-align:right;">
 -0.42
@@ -662,13 +665,13 @@ Naive
 <p>However, point-estimates can be deceiving a 89% compatibility interval was performed on the standardized improvement among the participants exposed to naturalistic soundscapes. The 89% compatibility interval was chosen as an alternative to the 95% custom because the number <em>89</em> is a Prime number <span class="citation">(McElreath, 2020a)</span>.</p>
 <p>The data is most compatible with ranges from 0.20 to 0.74, given our data and statistical model. Thus, the data indicates that a naturalistic soundscape has the potential to affect cognitive measures, as measured by the <code>DNB</code> and <code>BDS</code> attentional tasks described above.</p>
 <p><span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\)</span> is a crude model and doesn’t account for participant nativity. Thus a model with nativity and soundscape type could add accuracy to the predictions<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
-<p>However, it’s necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those whom were naive to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models.
+<p>However, it’s necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those whom were naïve to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models.
 <br><br></p>
 <div id="posterior-distribution-plots" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Posterior distribution plots</h3>
 <p>To visualize the posterior distributions, a scatterplot with a regression line and possible regression line guesses, extracted from the Bayesian fit was plotted.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
-<img src="Dataset1-25-dec_files/figure-html/unnamed-chunk-6-1.png" alt="Visualization of Regression Lines From the Posterior Distribution
+<img src="Dataset1_files/figure-html/unnamed-chunk-6-1.png" alt="Visualization of Regression Lines From the Posterior Distribution
 
  (Blue dots indicate the arithmetic mean value)" width="672" />
 <p class="caption">
