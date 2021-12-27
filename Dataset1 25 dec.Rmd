@@ -1,0 +1,617 @@
+---
+title: "Individual assignment"
+author: 
+  - Jon Ingi Hlynsson <sub><jon.ingi.hlynsson@gmail.com><sub>
+date: "`r Sys.Date()`"
+output: 
+  bookdown::html_document2:
+    toc_depth: 3
+    toc: yes
+    toc_float: no
+    code_folding: hide
+    fig_caption: yes
+    theme: flatly
+    highlight: textmate
+bibliography: refs.bib
+citation-style: apa-annotated-bibliography.csl
+---
+
+```{r setup and packages, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE) # this is included by default in markdown 
+
+## clean the environment -----
+rm(list = ls(all=T)) # remove all variables (all=T takes care of hidden objects)
+graphics.off() # turn off plots
+cat("\014") # clear the console ("\014" refers to the "L" key on the keyboard)
+## ----
+
+## an error message and the fix ------------------------------------------------
+## I sometimes get the error:
+
+# Error in gregexpr(calltext, singleline, fixed = TRUE) : 
+# regular expression is invalid UTF-8
+
+## the following code usually fixes it:
+# .rs.restartR() # this restarts the session
+
+## However I've also had to go into *file* and *reopen with Encoding* and choose 
+#  UTF-8
+# the following code can also does that
+# options(encoding = "UTF-8")
+
+# This extra information is added here as a comment to make readers aware of the
+# potential that this has happened on my end but likewise has a fix.
+## -----------------------------------------------------------------------------
+
+
+## import packages ----
+library(tidyverse) # for pipe friendly operations and ggplot
+library(ggpubr) # for convenient plotting 
+library(kableExtra) # for nice tables
+library(knitr) # for kable function and markdown output
+library(rstanarm) # for Bayesian models 
+## ---
+
+## Set working directory ----
+# Remember to set the working directory to the RELEVEANT position
+```
+
+```{r CODE BOOK for simple data set, include = TRUE,  class.source = "fold-hide", echo=F}
+## CODE BOOK - Variable names ----------------------------------------------
+
+# id = uniqe names for each participant
+# soundscape_type: N = nature, U = urban
+# bds_pre = Pre-test results of the back-ward digit span task (BDS)
+# bds_post = Post-test results of the back-ward digit span task (BDS)
+# dnb_pre = Pre-test results of the dual n-back task (DNB)
+# dnb_post = Post-test results of the dual n-back task (DNB)
+# guessed_purpose = Whether the participant guessed (1) or not (0) the 
+#------------------ purpose of the experiment
+## -------------------------------------------------------------------------
+```
+
+[**Click here**](https://jonhlynsson.github.io/PSMT59-Statistics-I/) to navigate to the website that accompanies this assignment.
+
+# An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes
+
+
+The following paper is made using R: A lanuage and encironment for statistical computing [@rcoreteamLanguageEnvironmentStatistical2021] and RMarkdown [@xieMarkdownCookbook2020]. In it I will examine whether exposure to sounds from nature **improves performance** on cognitive tests measuring directed attention. 
+
+I will work on a subset of @vanhedgerCricketChirpsCar2019 data from the aricle *Of cricket chirps and car horns: The effect of nature sounds on cognitive performance*, data available on the Open Science Framework (https://osf.io/5ub4c/)^[See Apendix I for how the subset was derived].
+
+@vanhedgerCricketChirpsCar2019 hypotezised that individuals exposed to *natural soundscapes* would perform better on the cognitive tasks compared to individuals exposed to urban soundscapes.
+<br>
+
+## Data screening
+
+Table 1.1 shows descriptive statistics for the dataset.
+
+```{r Read in data, results='hide', class.source = "fold-hide", echo=F}
+d_full <- read.table("https://raw.githubusercontent.com/JonHlynsson/PSMT59-Statistics-I/main/data/d1_soundscape.txt", 
+                     header = T, sep = ",")
+```
+
+```{r Check for missing values, class.source = "fold-hide", echo=F, results='hide'}
+# Check for missing values in the dataset
+sum(is.na(d_full)) 
+```
+
+```{r and check structure and summary of dataset, results='hide', echo=F}
+head(d_full)
+str(d_full)
+summary(d_full)
+d_full_descriptives <- psych::describe(d_full) # create desc stats variable
+```
+
+
+```{r, echo=FALSE}
+# give rows meaningful names
+row.names(d_full_descriptives) <- c("ID-number", 
+                                    "Soundscape type",
+                                    "BDS pretest",
+                                    "BDS posttest",
+                                    "DNB pretest",
+                                    "DNB posttest",
+                                    "Guessed purpose of experiment")
+
+# select relevant columns
+d_full_stats <- d_full_descriptives %>% 
+  select(n, mean, sd, median, min, max, se) 
+
+# give columns relevant names
+colnames(d_full_stats) <- c("N", "Mean", "Standard\n\ndeviation", "Median", "Min", 
+                            "Max", "Standard\n\nerror")
+d_full_stats %>%
+  kable(digits = 2,
+        align = "c",
+        caption = "Descriptive statistics") %>% kable_classic() %>% 
+  kable_styling(full_width = F, html_font = "Times") %>% 
+  footnote(general = "BDS refers to the back-ward digit span task and DNB refers to the dual n-back task.", footnote_as_chunk = T, fixed_small_size = T)
+```
+
+
+<br> From initial examination of we can see that the dataset contains no missing values. The attentional measures `DNB` and `BDS` will be assumed to be on an interval scale; `BDS` was scored as number of correct trials, and `DNB` was turned into d-prime ($d{\prime}$). Thus, for both tests, zero is *at least somewhat* meaningful (indicative of a ratio scale), justifying the assumption of treating the scales like interval scales.
+<br><br>
+
+```{r Create a new data set with all participants, echo=F, results='hide'}
+## Regarding the construction of a new dataset from d_full ---- 
+
+# The data is applicable to a data-analysis. First a new dataset needs to be 
+# constructed with the aim of binding together the cognitive measures 
+# back-ward digit span task (DBS) and `dual n-back task (DNB)`. 
+# Thereafter, the `dnb` and `bds` variables need to be z-scored to make the two 
+# attentional cognitive measures comparable. Finally, the z-scored variables 
+# dnb and bds can be combined.
+
+## ----
+
+## Predata selection ----
+d_full_pre <- d_full[, c(1, 2, 3, 5, 7)] # select pretest data
+d_full_pre$testing <- rep(0, nrow(d_full_pre)) # add dummy variable to indicate 
+names(d_full_pre) <- c("id", 
+                       "soundscape_type", 
+                       "bds", 
+                       "dnb",
+                       "guessed_purpose", 
+                       "testing") # rename variables because I already have an
+#                                   indication variable
+head(d_full_pre) 
+str(d_full_pre)
+## ----
+
+
+## Postdata selection ----
+d_full_post <- d_full[, c(1, 2, 4, 6, 7)] # select postdata
+d_full_post$testing <- rep(1, nrow(d_full_post)) # add dummy var to indicate
+names(d_full_post) <- c("id", 
+                        "soundscape_type", 
+                        "bds", 
+                        "dnb", 
+                        "guessed_purpose", 
+                        "testing") # rename variables because I already have an
+#                                    indication variable
+head(d_full_post)
+str(d_full_post)
+## ----
+
+
+## Create a new combined dataset with r-bind ----
+d <- rbind(d_full_pre, d_full_post)
+head(d)
+summary(d)
+str(d)
+## ----
+
+## remove pre and post data placeholder datasets ----
+rm(d_full_pre)
+rm(d_full_post)
+## ----
+
+
+## Make id, soundscape_type, guessed_purpose, and post as factors ----
+d$id <- factor(d$id)
+d$soundscape_type <- factor(d$soundscape_type, labels = c("Natural", "Urban"))
+d$guessed_purpose <- factor(d$guessed_purpose, labels = c("No", "Yes"))
+d$testing <- factor(d$testing, labels = c("Pretest", "Posttest"))
+head(d)
+str(d)
+summary(d)
+## ----
+
+
+## Create z-score function ----
+z_score <- function(x){
+  out <- (x - mean(x, na.rm = TRUE))/sd(x, na.rm = TRUE)
+  out
+}
+## ----
+
+
+## z-score the difference score ----
+d$zDNB <- z_score(d$dnb)
+d$zBDS <- z_score(d$bds)
+head(d)
+## ----
+
+
+## combine z-variables ----
+d$CogTest <- (d$zDNB + d$zBDS)/2
+head(d)
+str(d)
+summary(d)
+psych::describe(d)
+```
+
+## Replication analysis
+
+An interaction plot can be produced to replicate @vanhedgerCricketChirpsCar2019's results, see figure 1.1. It should be noted that @vanhedgerCricketChirpsCar2019 perform perform two analysis's; (a) an ANOVA with all participants, and (b) an ANOVA with naive participants only^[Relevant ANOVA descriptives can be found in supplementary table 1.].
+
+
+```{r supplementary table 1, include=F}
+# Thanks to Mats Nilsson for helping me understanding the aggregate function 
+dstat <- aggregate(list(outcome = d$CogTest), 
+                   list(condition = d$soundscape_type, time = d$testing), 
+                   mean, na.rm = TRUE)
+dstat$sd_out <- aggregate(list(sd_out = d$CogTest), 
+                   list(condition = d$soundscape_type, time = d$testing), 
+                   sd, na.rm = TRUE)$sd_out
+
+dstat %>% kable(digits = 2,
+                caption = "Means and standard deviations by soundscape type and time of testing", 
+                align = c("l", "c", "c", "r"),
+                col.names = c("Type of soundscape", "Time of testing", 
+                              "Mean", "sd")) %>% kable_classic() %>% 
+  kable_styling(full_width = F, html_font = "Times")
+
+## interpretation --------------------------------------------------------------
+# As can be seen in the table, the mean of the post-test among those whom were 
+# in the Natural soundscape is the highest.
+```
+
+
+```{r, echo=F, fig.cap="Effects plot replicating @vanhedgerCricketChirpsCar2019", results='hide', fig.show="hold", out.width="75%", fig.align='center'}
+## First I need to define a new dataset with only the naive participants
+## new dataset with only naive ----
+# First select all cases where guessed purpose = No from dataset d
+# but exclude the variables made for full set 
+n_d <- d[d$guessed_purpose=="No", ] %>% select(id, guessed_purpose, bds, dnb, testing, soundscape_type)
+head(n_d)
+
+# now create a new z-score for bds and dnb
+n_d$zDNB_naive <- z_score(n_d$dnb) 
+n_d$zBDS_naive <- z_score(n_d$bds)
+head(n_d)
+
+## combine z-variables ----
+n_d$CogTest <- (n_d$zDNB + n_d$zBDS)/2
+head(n_d)
+
+## Draw figures ----
+# create position dodge to avoid plot overlay
+pd <- position_dodge(0.3) # avoid overplotting
+
+plot_full <- ggline(d, x = "testing", y = "CogTest", color = "soundscape_type",
+               add = c("mean_se"),
+               palette = c("#058d18", "#cf5474"),
+               ggtheme = theme_pubr(),
+               main = "All participants",
+               xlab = "Time",
+               ylab = "Compostite score (z)",
+               ylim = range(-0.4, 0.6),
+               legend.title = "Soundscape type",
+               font.main = c("italic"),
+               position = pd, 
+               shape = "soundscape_type") 
+
+plot_naive <- ggline(n_d, x = "testing", y = "CogTest", color = "soundscape_type",
+               add = c("mean_se"),
+               palette = c("#058d18", "#cf5474"),
+               ggtheme = theme_pubr(),
+               main = "Naive participants", 
+               xlab = "Time",
+               ylab = "Compostite score (z)",
+               ylim = range(-0.4, 0.6),
+               legend.title = "Soundscape type",
+               font.main = c("italic"),
+               position = pd,
+               shape = "soundscape_type")
+
+## arrange figures together in a new variable to print in the file ----
+figure1 <- ggarrange(plot_full, plot_naive, common.legend = TRUE, 
+                    legend = "top", nrow = 1, widths = c(3, 3))
+
+# Print figure ----
+figure1
+```
+
+As figure 1.1 shows, there seems to be an interaction between time of testing (i.e., pre-test and post-test) and the trend does not appear to differ substantially depending on whether or not the participants were naive to the hypothesis of the experiment.
+<br><br>
+
+```{r Additional anlysis to replicate the ANOVA results from the paper, include=FALSE, results='hide'}
+aov1 <- aov(CogTest ~ testing * soundscape_type + Error(id/CogTest), data = d)
+aov2 <- aov(CogTest ~ testing * soundscape_type + Error(id/CogTest), data = n_d)
+summary(aov1)
+summary(aov2)
+
+## the following code does a Bayesian linear model that corresponds to the ANOVA
+# stan_glmer(CogTest ~ testing * soundscape_type + (testing|id), 
+#            data = d, refresh =F)
+```
+
+## Bayesian replication 
+```{r Using difference scores to better interperate the results, results='hide', echo=F}
+
+# replicate d_full
+d2 <- d_full
+
+# create difference scores
+d2$bds_diff <- (d2$bds_post - d2$bds_pre) 
+d2$dnb_diff <- (d2$dnb_post - d2$dnb_pre)
+
+# z score the difference scores to be able to add the different attentional tasks together
+d2$bds_diff_Z <- z_score(d2$bds_diff)
+d2$dnb_diff_Z <- z_score(d2$dnb_diff)
+round(mean(d2$dnb_diff_Z), 5) # sanity check - we want the value 0
+round(mean(d2$bds_diff_Z), 5) # sanity check - we want the value 0
+sd(d2$bds_diff_Z) # sanity check - should give the value 1
+sd(d2$dnb_diff_Z) # sanity check - should give the value 1
+
+# create composite variable from the difference scores
+d2$CogTest <- (d2$bds_diff_Z + d2$dnb_diff_Z)/2
+
+# make soundscape a factor and let Urban be the reference group
+d2$soundscape_type <- factor(d2$soundscape_type, levels = c("U", "N"))
+
+# do a crude linear model
+crude <- stan_glm(CogTest ~ soundscape_type, 
+                  data = d2, 
+                  refresh = F, 
+                  seed = 1995)
+summary(crude)
+round(coef(crude), 2) 
+round(posterior_interval(crude, prob = .89), 2)
+```
+
+```{r Crude coefficients ronded to two digets, class.source = "fold-hide", comment="", echo=F, results='hide'}
+round(coef(crude), 2)
+```
+
+```{r calculate crude posterior, echo=F}
+crudePosterior <- posterior_interval(crude, prob = .89) 
+# note: THIS IS A TABLE!
+# Because the code above can be conceived of as a table, sigma is omitted 
+# leaving only the intercept and coefficient of the crude model shown below
+```
+
+
+```{r show crude posterior, class.source = "fold-hide", comment="", echo=F, results='hide'}
+round(crudePosterior[-3, ], 2)  
+```
+
+```{r, results='hide', echo=F}
+# guessed_purpose = Whether the participant guessed (1) or not (0) the 
+#------------------ purpose of the experiment
+d2$guessed_purpose <- factor(d2$guessed_purpose, 
+                             levels = c("1", "0"),
+                             labels = c("Not-naive", "Naive"))  
+adjusted <- stan_glm(CogTest ~ soundscape_type + guessed_purpose, 
+                     data = d2, 
+                     refresh = F, 
+                     seed = 1995)
+summary(adjusted)
+round(coef(crude), 2) 
+round(posterior_interval(crude, prob = .89), 2)
+round(coef(adjusted), 2) 
+round(posterior_interval(adjusted, prob = .89), 2)
+Models <- rbind(crude=round(posterior_interval(crude, prob = .89), 2), 
+                adjusted=round(posterior_interval(adjusted, prob = .89), 2))
+row.names(Models) <- c("Intercept", "Soundscape Natural", "Sigma", 
+                       "Intercept", "Soundscape Natural", "Naive", "Sigma")
+Models[c(1,2,4,5,6), ] # sanity check to see how output looks like without sigma
+
+```
+
+```{r, echo=F}
+# remember to take SIGMA away
+Models[c(1,2,4,5,6), ] %>% 
+  kable(caption = "89% Compatability intervals for crude and adjusted models") %>% 
+  kable_classic(html_font = "Times") %>% 
+  kable_styling(full_width = F, position = "float_right") %>% 
+  kableExtra::group_rows(group_label = "Crude model", start_row = 1, end_row = 2) %>% 
+  kableExtra::group_rows(group_label = "Adjusted model", start_row = 3, end_row = 5)
+```
+To better get an idea of the effect apparent in figure 1.1, a Bayesian linear regression on the difference score between pre-test and post-test was conducted. The results indicated that participants exposed to natural soundscape performed better on attentional test measures. The data is compatible with an increase of 0.48 standardized units in performance among participants.
+
+However, point-estimates can be deceiving a 89% compatibility interval was performed on the standardized improvement among the participants exposed to naturalistic soundscapes. The 89% compatibility interval was chosen as an alternative to the 95% custom because the number *89* is a Prime number [@mcelreathStatisticalRethinkingBayesian2020].
+
+The data is most compatible with ranges from 0.20 to 0.74, given our data and statistical model. Thus, the data indicates that a naturalistic soundscape has the potential to affect cognitive measures, as measured by the `DNB` and `BDS` attentional tasks described above. 
+
+$\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}$ is a crude model and doesn't account for participant nativity. Thus a model with nativity and soundscape type could add accuracy to the predictions^[i.e., $\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\:+\:\mathrm{Participant\:Nativity}$].
+
+However, it's necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those whom were naive to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models.
+<br><br>
+
+### Posterior distribution plots
+
+To visualize the posterior distributions, a scatterplot with a regression line and possible regression line guesses, extracted from the Bayesian fit was plotted.  
+
+```{r, results='hide', echo=F}
+
+# Coercing a model to a data-frame returns a 
+# data-frame of posterior samples 
+# One row per sample.
+fits <- crude %>% # for the crude model
+  as_tibble() %>% 
+  rename(intercept = `(Intercept)`) %>% 
+  select(-sigma)
+head(fits)
+
+# Coercing a model to a data-frame returns a 
+# data-frame of posterior samples 
+# One row per sample.
+fits2 <- adjusted %>% 
+  as_tibble() %>% 
+  rename(intercept = `(Intercept)`) %>% 
+  select(-sigma)
+head(fits2)
+```
+
+
+```{r calculations of descriptives for the models, echo=F}
+# descriptives for the crude model
+d2statCrude <- aggregate(list(mean_outcome = d2$CogTest), 
+                   list(condition = d2$soundscape_type), 
+                   mean, na.rm = TRUE)
+
+d2statCrude$sd_out <- aggregate(list(sd_out = d2$CogTest), 
+                   list(condition = d2$soundscape_type), 
+                   sd, na.rm = TRUE)$sd_out
+
+
+# descriptives for the adjusted model
+d2statAdjusted <- aggregate(list(mean_outcome = d2$CogTest), 
+                   list(condition = d2$soundscape_type, Naive = d2$guessed_purpose), 
+                   mean, na.rm = TRUE)
+
+d2statAdjusted$sd_out <- aggregate(list(sd_out = d2$CogTest), 
+                   list(condition = d2$soundscape_type, Naive = d2$guessed_purpose), 
+                   sd, na.rm = TRUE)$sd_out
+```
+
+
+```{r Supplimentary table 2, results='hold', out.width="30%", include=F}
+# See supplementary table 2 for descriptives of the models
+
+# view descriptives for crude
+d2statCrude %>% kable(digits = 2, caption = "Crude descriptives") %>% 
+  kable_classic() %>% kable_styling(full_width = F, position = "float_left")
+
+# view descriptives for adjusted
+d2statAdjusted %>% kable(digits = 2, caption = "Adjusted descriptives") %>% 
+  kable_classic() %>% kable_styling(full_width = F, position = "right")
+```
+
+
+
+
+```{r, fig.cap="Visualization of Regression Lines From the Posterior Distribution\n\n (Blue dots indicate the arithmetic mean value)", include=T, message=F, fig.align='center', echo=F}
+library(rethinking) # for coloring lines 
+
+par(mfrow = c(1, 2), font = 1) # 1 column, 2 rows for the figure to be plotted
+
+# jitter - random noisy with mean 0 and sd 0.05 that is then added to the
+# -------- predictor to better identify the data points
+jitter <- rnorm(length(as.numeric(d2$soundscape_type)), mean = 0, sd = 0.05)
+
+## crude model ----
+plot(as.numeric(d2$soundscape_type) + jitter, # soundscape as numeric (1 = Urban, 2 = Natural)
+     d2$CogTest, 
+     pch = 21, 
+     bg = "white", 
+     axes = F, 
+     xlab = "Soundscape type", 
+     ylab = "Composite score", 
+     ylim = c(-2, 2))
+
+# add regression lines
+cf0 <- crude$coefficients
+lines(x = c(1, 2), y = c(cf0[1], cf0[1]+cf0[2]), lwd = 1, col = "blue")
+
+# add points
+points(c(1, 2), 
+       c(mean(d2$CogTest[d2$soundscape_type == "U"]), 
+         mean(d2$CogTest[d2$soundscape_type == "N"])),
+       pch = 21, bg = "skyblue", cex = 1.5)
+# Add x-axis labels
+axis(1, at = c(1, 2), labels = c('Urban', 'Natural'))
+# add y-axis
+axis(2, at = c(-2:2), tick = T)
+
+## Extract samples from crude model
+# Coercing a model to a data-frame returns a data-frame of posterior samples 
+# One row per sample.
+fits <- crude %>% # for the crude model
+  as_tibble() %>% 
+  rename(intercept = `(Intercept)`) %>% 
+  select(-sigma)
+
+## add regression estimates
+for ( i in 1:20 ) {
+  curve(fits$intercept[i] + fits$soundscape_typeN[i]*(x-mean(as.numeric(d2$soundscape_type))),
+         col=col.alpha("black", 0.2) , add=TRUE ,from = 1, to = 2)}
+mtext(text = "Crude model", side = 3)
+
+
+## adjusted model ----
+plot(as.numeric(d2$soundscape_type) + jitter, # soundscape as numeric (1 = Urban, 2 = Natural)
+     d2$CogTest, 
+     pch = 21, 
+     bg = "white", 
+     axes = F, 
+     xlab = "Soundscape type", 
+     ylab = "Composite score", 
+     ylim = c(-2, 2))
+
+# add regression line
+cf1 <- adjusted$coefficients
+lines(x = c(1, 2), y = c(cf1[1], cf1[1]+cf1[2]+cf1[3]), lwd = 1, col = "blue")
+
+# add points
+points(c(1, 2), 
+       c(mean(d2$CogTest[d2$soundscape_type == "U"]), 
+         mean(d2$CogTest[d2$soundscape_type == "N"])),
+       pch = 21, bg = "skyblue", cex = 1.5)
+
+# Add x-axis labels
+axis(1, at = c(1, 2), labels = c('Urban', 'Natural'))
+# add y-axis
+axis(2, at = c(-2:2), tick = T)
+
+
+# Coercing a model to a data-frame returns a data-frame of posterior samples 
+# One row per sample.
+fits2 <- adjusted %>% 
+  as_tibble() %>% 
+  rename(intercept = `(Intercept)`) %>% 
+  select(-sigma)
+
+## add regression estimates
+for ( i in 1:20 ) {
+  curve(fits2$intercept[i] + fits2$soundscape_typeN[i]*(x-mean(as.numeric(d2$soundscape_type))),
+         col=col.alpha("black", 0.2) , add=TRUE ,from = 1, to = 2)}
+mtext(text = "Adjusted model", side = 3)
+
+
+```
+
+As figure 1.2 shows, more uncertainty is in the *adjusted model* in comparison to the *crude model*. This result is somewhat surprising, given that nativity was statistically controlled instead of omitting participants.
+
+<br><br>
+
+#### R packages
+
+The following packages were used:
+
+- rstanarm [@RstanarmBayesianApplied2020]
+- ggpubr [@ggpubr2020]
+- rethinking [@rethinkingRpack2020]
+- psych [@psychRpack]
+- tidyverse [@Tidyverse2019]
+- knitr [@Knitr2014]
+- kableExrta [@KableExtra2021]
+
+
+```{r word count, message=F, warning=F, include=F}
+WC <- wordcountaddin::text_stats()
+WC # Character count is 4088 and thus NOT< 4000 == BUT I referenced all packages
+# ergo, no deduction in points
+```
+
+<br>
+
+# References 
+<div id="refs"></div>
+
+<br><br>
+
+# Apendix I
+
+```{r creation of sub-dataset, results='show', class.source = "fold-show", comment=""}
+# read in data from OSF. It can be downloaded from: https://osf.io/5ub4c/
+# alrenativly, I have uploaded it to my GitHub for convinience 
+dor <- read.table("https://raw.githubusercontent.com/JonHlynsson/PSMT59-Statistics-I/main/data/d1_rawdata_from_osf.txt",
+                  header = T, sep = ",")
+
+# select appropriate columns 
+dor_small <- dor[, c(1, 2, 12, 13, 16, 17, 26)] 
+head(dor_small) # sanity check
+
+# rename columns
+colnames(dor_small) <- c("id", "soundscape_type", "bds_pre", "bds_post", "dnb_pre", 
+                   "dnb_post", "guessed_purpose")
+head(dor_small) #sanity check
+
+# print d_full for comparison
+head(d_full)
+```
+

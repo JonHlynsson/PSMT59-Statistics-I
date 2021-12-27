@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jon Ingi Hlynsson jon.ingi.hlynsson@gmail.com" />
+
+<meta name="date" content="2021-12-27" />
+
+<title>Individual assignment</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">MyLabJournal</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="Dataset1-25-dec.html">The paper</a>
+</li>
+<li>
+  <a href="Links.html">Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Individual assignment</h1>
+<h4 class="author">Jon Ingi Hlynsson <sub><a href="mailto:jon.ingi.hlynsson@gmail.com" class="email">jon.ingi.hlynsson@gmail.com</a><sub></h4>
+<h4 class="date">2021-12-27</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#an-exposure-to-a-natural-soundscape-improves-cognitive-performance-on-cognitive-tasks-when-compared-to-urban-soundscapes"><span class="toc-section-number">1</span> An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes</a>
+<ul>
+<li><a href="#data-screening"><span class="toc-section-number">1.1</span> Data screening</a></li>
+<li><a href="#replication-analysis"><span class="toc-section-number">1.2</span> Replication analysis</a></li>
+<li><a href="#bayesian-replication"><span class="toc-section-number">1.3</span> Bayesian replication</a>
+<ul>
+<li><a href="#posterior-distribution-plots"><span class="toc-section-number">1.3.1</span> Posterior distribution plots</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#references"><span class="toc-section-number">2</span> References</a></li>
+<li><a href="#apendix-i"><span class="toc-section-number">3</span> Apendix I</a></li>
+</ul>
+</div>
+
+<p><a href="https://jonhlynsson.github.io/PSMT59-Statistics-I/"><strong>Click here</strong></a> to navigate to the website that accompanies this assignment.</p>
+<div id="an-exposure-to-a-natural-soundscape-improves-cognitive-performance-on-cognitive-tasks-when-compared-to-urban-soundscapes" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes</h1>
+<p>The following paper is made using R: A lanuage and encironment for statistical computing <span class="citation">(R Core Team, 2021)</span> and RMarkdown <span class="citation">(Xie et al., 2020)</span>. In it I will examine whether exposure to sounds from nature <strong>improves performance</strong> on cognitive tests measuring directed attention.</p>
+<p>I will work on a subset of <span class="citation">Van Hedger et al. (2019)</span> data from the aricle <em>Of cricket chirps and car horns: The effect of nature sounds on cognitive performance</em>, data available on the Open Science Framework (<a href="https://osf.io/5ub4c/" class="uri">https://osf.io/5ub4c/</a>)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p><span class="citation">Van Hedger et al. (2019)</span> hypotezised that individuals exposed to <em>natural soundscapes</em> would perform better on the cognitive tasks compared to individuals exposed to urban soundscapes.
+<br></p>
+<div id="data-screening" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Data screening</h2>
+<p>Table 1.1 shows descriptive statistics for the dataset.</p>
+<table class=" lightable-classic table" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; margin-left: auto; margin-right: auto; font-family: Times; width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>
+<span id="tab:unnamed-chunk-1">Table 1.1: </span>Descriptive statistics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+N
+</th>
+<th style="text-align:center;">
+Mean
+</th>
+<th style="text-align:center;">
+<p>Standard</p>
+deviation
+</th>
+<th style="text-align:center;">
+Median
+</th>
+<th style="text-align:center;">
+Min
+</th>
+<th style="text-align:center;">
+Max
+</th>
+<th style="text-align:center;">
+<p>Standard</p>
+error
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ID-number
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+32.59
+</td>
+<td style="text-align:center;">
+19.04
+</td>
+<td style="text-align:center;">
+32.00
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+65.00
+</td>
+<td style="text-align:center;">
+2.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Soundscape type
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+1.51
+</td>
+<td style="text-align:center;">
+0.50
+</td>
+<td style="text-align:center;">
+2.00
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+2.00
+</td>
+<td style="text-align:center;">
+0.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BDS pretest
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+9.37
+</td>
+<td style="text-align:center;">
+2.47
+</td>
+<td style="text-align:center;">
+10.00
+</td>
+<td style="text-align:center;">
+3.00
+</td>
+<td style="text-align:center;">
+14.00
+</td>
+<td style="text-align:center;">
+0.31
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BDS posttest
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+9.76
+</td>
+<td style="text-align:center;">
+2.56
+</td>
+<td style="text-align:center;">
+10.00
+</td>
+<td style="text-align:center;">
+4.00
+</td>
+<td style="text-align:center;">
+14.00
+</td>
+<td style="text-align:center;">
+0.32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DNB pretest
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+1.49
+</td>
+<td style="text-align:center;">
+0.56
+</td>
+<td style="text-align:center;">
+1.45
+</td>
+<td style="text-align:center;">
+-0.38
+</td>
+<td style="text-align:center;">
+2.79
+</td>
+<td style="text-align:center;">
+0.07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DNB posttest
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+1.67
+</td>
+<td style="text-align:center;">
+0.56
+</td>
+<td style="text-align:center;">
+1.68
+</td>
+<td style="text-align:center;">
+0.22
+</td>
+<td style="text-align:center;">
+2.95
+</td>
+<td style="text-align:center;">
+0.07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Guessed purpose of experiment
+</td>
+<td style="text-align:center;">
+63
+</td>
+<td style="text-align:center;">
+0.27
+</td>
+<td style="text-align:center;">
+0.45
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+0.00
+</td>
+<td style="text-align:center;">
+1.00
+</td>
+<td style="text-align:center;">
+0.06
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> BDS refers to the back-ward digit span task and DNB refers to the dual n-back task.
+</td>
+</tr>
+</tfoot>
+</table>
+<p><br> From initial examination of we can see that the dataset contains no missing values. The attentional measures <code>DNB</code> and <code>BDS</code> will be assumed to be on an interval scale; <code>BDS</code> was scored as number of correct trials, and <code>DNB</code> was turned into d-prime (<span class="math inline">\(d{\prime}\)</span>). Thus, for both tests, zero is <em>at least somewhat</em> meaningful (indicative of a ratio scale), justifying the assumption of treating the scales like interval scales.
+<br><br></p>
+</div>
+<div id="replication-analysis" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Replication analysis</h2>
+<p>An interaction plot can be produced to replicate <span class="citation">Van Hedger et al. (2019)</span>’s results, see figure 1.1. It should be noted that <span class="citation">Van Hedger et al. (2019)</span> perform perform two analysis’s; (a) an ANOVA with all participants, and (b) an ANOVA with naive participants only<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="Dataset1-25-dec_files/figure-html/unnamed-chunk-2-1.png" alt="Effects plot replicating @vanhedgerCricketChirpsCar2019" width="75%" />
+<p class="caption">
+Figure 1.1: Effects plot replicating <span class="citation">Van Hedger et al. (2019)</span>
+</p>
+</div>
+<p>As figure 1.1 shows, there seems to be an interaction between time of testing (i.e., pre-test and post-test) and the trend does not appear to differ substantially depending on whether or not the participants were naive to the hypothesis of the experiment.
+<br><br></p>
+</div>
+<div id="bayesian-replication" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Bayesian replication</h2>
+<table class=" lightable-classic table" style="font-family: Times; margin-left: auto; margin-right: auto; width: auto !important; float: right; margin-left: 10px;">
+<caption>
+<span id="tab:unnamed-chunk-4">Table 1.2: </span>89% Compatability intervals for crude and adjusted models
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+5.5%
+</th>
+<th style="text-align:right;">
+94.5%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr grouplength="2">
+<td colspan="3" style="border-bottom: 0;">
+<strong>Crude model</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Intercept
+</td>
+<td style="text-align:right;">
+-0.43
+</td>
+<td style="text-align:right;">
+-0.03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soundscape Natural
+</td>
+<td style="text-align:right;">
+0.20
+</td>
+<td style="text-align:right;">
+0.74
+</td>
+</tr>
+<tr grouplength="3">
+<td colspan="3" style="border-bottom: 0;">
+<strong>Adjusted model</strong>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Intercept
+</td>
+<td style="text-align:right;">
+-0.45
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Soundscape Natural
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+0.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+Naive
+</td>
+<td style="text-align:right;">
+-0.42
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+</tr>
+</tbody>
+</table>
+<p>To better get an idea of the effect apparent in figure 1.1, a Bayesian linear regression on the difference score between pre-test and post-test was conducted. The results indicated that participants exposed to natural soundscape performed better on attentional test measures. The data is compatible with an increase of 0.48 standardized units in performance among participants.</p>
+<p>However, point-estimates can be deceiving a 89% compatibility interval was performed on the standardized improvement among the participants exposed to naturalistic soundscapes. The 89% compatibility interval was chosen as an alternative to the 95% custom because the number <em>89</em> is a Prime number <span class="citation">(McElreath, 2020a)</span>.</p>
+<p>The data is most compatible with ranges from 0.20 to 0.74, given our data and statistical model. Thus, the data indicates that a naturalistic soundscape has the potential to affect cognitive measures, as measured by the <code>DNB</code> and <code>BDS</code> attentional tasks described above.</p>
+<p><span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\)</span> is a crude model and doesn’t account for participant nativity. Thus a model with nativity and soundscape type could add accuracy to the predictions<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p>However, it’s necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those whom were naive to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models.
+<br><br></p>
+<div id="posterior-distribution-plots" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Posterior distribution plots</h3>
+<p>To visualize the posterior distributions, a scatterplot with a regression line and possible regression line guesses, extracted from the Bayesian fit was plotted.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<img src="Dataset1-25-dec_files/figure-html/unnamed-chunk-6-1.png" alt="Visualization of Regression Lines From the Posterior Distribution
+
+ (Blue dots indicate the arithmetic mean value)" width="672" />
+<p class="caption">
+<p>Figure 1.2: Visualization of Regression Lines From the Posterior Distribution</p>
+(Blue dots indicate the arithmetic mean value)
+</p>
+</div>
+<p>As figure 1.2 shows, more uncertainty is in the <em>adjusted model</em> in comparison to the <em>crude model</em>. This result is somewhat surprising, given that nativity was statistically controlled instead of omitting participants.</p>
+<p><br><br></p>
+<div id="r-packages" class="section level4" number="1.3.1.1">
+<h4><span class="header-section-number">1.3.1.1</span> R packages</h4>
+<p>The following packages were used:</p>
+<ul>
+<li>rstanarm <span class="citation">(Goodrich et al., 2020)</span></li>
+<li>ggpubr <span class="citation">(Kassambara, 2020)</span></li>
+<li>rethinking <span class="citation">(McElreath, 2020b)</span></li>
+<li>psych <span class="citation">(Revelle, 2021)</span></li>
+<li>tidyverse <span class="citation">(Wickham et al., 2019)</span></li>
+<li>knitr <span class="citation">(Xie, 2014)</span></li>
+<li>kableExrta <span class="citation">(Zhu, 2021)</span></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<div id="references" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent" line-spacing="2">
+<div id="ref-RstanarmBayesianApplied2020" class="csl-entry">
+Goodrich, B., Gabry, J., Ali, I., &amp; Brilleman, S. (2020). <em>Rstanarm: <span>Bayesian</span> applied regression modeling via <span>Stan</span>.</em> <a href="https://mc-stan.org/rstanarm">https://mc-stan.org/rstanarm</a>
+</div>
+<div id="ref-ggpubr2020" class="csl-entry">
+Kassambara, A. (2020). <em>Ggpubr: ’ggplot2’ based publication ready plots</em> [Manual]. <a href="https://CRAN.R-project.org/package=ggpubr">https://CRAN.R-project.org/package=ggpubr</a>
+</div>
+<div id="ref-mcelreathStatisticalRethinkingBayesian2020" class="csl-entry">
+McElreath, R. (2020a). <em>Statistical <span>Rethinking</span>: <span>A Bayesian Course</span> with <span>Examples</span> in <span>R</span> and <span>STAN</span></em>. <span>CRC Press</span>.
+</div>
+<div id="ref-rethinkingRpack2020" class="csl-entry">
+McElreath, R. (2020b). <em>Rethinking: <span>Statistical Rethinking</span> book package</em> [Manual].
+</div>
+<div id="ref-rcoreteamLanguageEnvironmentStatistical2021" class="csl-entry">
+R Core Team. (2021). <em>R: <span>A</span> language and environment for statistical computing</em> [Manual]. <span>R Foundation for Statistical Computing</span>. <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+</div>
+<div id="ref-psychRpack" class="csl-entry">
+Revelle, W. (2021). <em>Psych: <span>Procedures</span> for psychological, psychometric, and personality research</em> [Manual]. <span>Northwestern University</span>. <a href="https://CRAN.R-project.org/package=psych">https://CRAN.R-project.org/package=psych</a>
+</div>
+<div id="ref-vanhedgerCricketChirpsCar2019" class="csl-entry">
+Van Hedger, S. C., Nusbaum, H. C., Clohisy, L., Jaeggi, S. M., Buschkuehl, M., &amp; Berman, M. G. (2019). Of cricket chirps and car horns: <span>The</span> effect of nature sounds on cognitive performance. <em>Psychonomic Bulletin &amp; Review</em>, <em>26</em>(2), 522–530. <a href="https://doi.org/10.3758/s13423-018-1539-1">https://doi.org/10.3758/s13423-018-1539-1</a>
+</div>
+<div id="ref-Tidyverse2019" class="csl-entry">
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., … Yutani, H. (2019). Welcome to the <span class="nocase">tidyverse</span>. <em>Journal of Open Source Software</em>, <em>4</em>(43), 1686. <a href="https://doi.org/10.21105/joss.01686">https://doi.org/10.21105/joss.01686</a>
+</div>
+<div id="ref-Knitr2014" class="csl-entry">
+Xie, Y. (2014). Knitr: <span>A</span> comprehensive tool for reproducible research in <span>R</span>. In V. Stodden, F. Leisch, &amp; R. D. Peng (Eds.), <em>Implementing reproducible computational research</em>. <span>Chapman and Hall/CRC</span>. <a href="http://www.crcpress.com/product/isbn/9781466561595">http://www.crcpress.com/product/isbn/9781466561595</a>
+</div>
+<div id="ref-xieMarkdownCookbook2020" class="csl-entry">
+Xie, Y., Dervieux, C., &amp; Riederer, E. (2020). <em>R markdown cookbook</em>. <span>Chapman and Hall/CRC</span>. <a href="https://bookdown.org/yihui/rmarkdown-cookbook">https://bookdown.org/yihui/rmarkdown-cookbook</a>
+</div>
+<div id="ref-KableExtra2021" class="csl-entry">
+Zhu, H. (2021). <em><span class="nocase">kableExtra</span>: <span>Construct</span> complex table with ’kable’ and pipe syntax</em> [Manual]. <a href="https://CRAN.R-project.org/package=kableExtra">https://CRAN.R-project.org/package=kableExtra</a>
+</div>
+</div>
+<p><br><br></p>
+</div>
+<div id="apendix-i" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Apendix I</h1>
+<pre class="r fold-show"><code># read in data from OSF. It can be downloaded from: https://osf.io/5ub4c/
+# alrenativly, I have uploaded it to my GitHub for convinience 
+dor &lt;- read.table(&quot;https://raw.githubusercontent.com/JonHlynsson/PSMT59-Statistics-I/main/data/d1_rawdata_from_osf.txt&quot;,
+                  header = T, sep = &quot;,&quot;)
+
+# select appropriate columns 
+dor_small &lt;- dor[, c(1, 2, 12, 13, 16, 17, 26)] 
+head(dor_small) # sanity check</code></pre>
+<pre><code>  Subject Soundscape_Type BDS_Pre BDS_Post  DNB_Pre DNB_Post Guessed.Purpose.
+1       1               N       8       11 1.902088 2.077163                0
+2       2               U       6        6 1.365622 1.581077                0
+3       3               N       8       11 1.809165 2.588593                1
+4       4               U      11       13 1.768480 2.082643                1
+5       5               N      12       11 2.792282 2.953092                1
+6       6               N      12       12 2.140714 1.400741                1</code></pre>
+<pre class="r fold-show"><code># rename columns
+colnames(dor_small) &lt;- c(&quot;id&quot;, &quot;soundscape_type&quot;, &quot;bds_pre&quot;, &quot;bds_post&quot;, &quot;dnb_pre&quot;, 
+                   &quot;dnb_post&quot;, &quot;guessed_purpose&quot;)
+head(dor_small) #sanity check</code></pre>
+<pre><code>  id soundscape_type bds_pre bds_post  dnb_pre dnb_post guessed_purpose
+1  1               N       8       11 1.902088 2.077163               0
+2  2               U       6        6 1.365622 1.581077               0
+3  3               N       8       11 1.809165 2.588593               1
+4  4               U      11       13 1.768480 2.082643               1
+5  5               N      12       11 2.792282 2.953092               1
+6  6               N      12       12 2.140714 1.400741               1</code></pre>
+<pre class="r fold-show"><code># print d_full for comparison
+head(d_full)</code></pre>
+<pre><code>  id soundscape_type bds_pre bds_post  dnb_pre dnb_post guessed_purpose
+1  1               N       8       11 1.902088 2.077163               0
+2  2               U       6        6 1.365622 1.581077               0
+3  3               N       8       11 1.809165 2.588593               1
+4  4               U      11       13 1.768480 2.082643               1
+5  5               N      12       11 2.792282 2.953092               1
+6  6               N      12       12 2.140714 1.400741               1</code></pre>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>See Apendix I for how the subset was derived<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Relevant ANOVA descriptives can be found in supplementary table 1.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>i.e., <span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\:+\:\mathrm{Participant\:Nativity}\)</span><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

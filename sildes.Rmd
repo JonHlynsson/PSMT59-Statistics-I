@@ -1,0 +1,67 @@
+---
+title: "Individual assignment"
+subtitle: "Dataset 1"  
+author: 
+  - "Jon Ingi Hlynsson"
+date: '`r Sys.Date()`'
+institute: "Stockholm University"
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    self_contained: true
+    seal: false
+    nature:
+      slideNumberFormat: "%current%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(kableExtra)
+knitr::opts_chunk$set(
+  # fig.width=9, fig.height=6, fig.retina=3, dpi = 150,
+  # out.width = "150%",
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE
+)
+#fig.width=20, fig.height=15, fig.retina=13
+# https://scontent-arn2-2.xx.fbcdn.net/v/t1.6435-9/49625893_10158449283896980_6346470992008708096_n.png?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=viC67fSTHZEAX_YQVZk&_nc_ht=scontent-arn2-2.xx&oh=00_AT_tC-v9RCri9Ga_1-6khqI8owaASjBwNO-m4lwIWJgLyw&oe=61EE1A0E
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent(
+  primary_color = "#1381B0",
+  secondary_color = "#FF961C",
+  inverse_header_color = "#FFFFFF",
+  inverse_background_color = "#4c516d"
+)
+```
+
+class: center, middle
+background-image: url(https://www.amscins.com/wp-content/uploads/2011/05/Stockholm-university.jpg)
+background-size: 125px
+background-position: 5% 92%
+
+# Individual assignment
+
+### Dataset 1
+
+Jon Ingi Hlynsson
+
+
+
+#### Stockholm University 
+
+#### Date last edited: `r Sys.Date()`
+
+---
+
+## The slides are under construction!
+

@@ -1,11 +1,11 @@
-name: "MyLabJournal"
+name: "Individual assignment"
 navbar:
   title: "MyLabJournal"
   left:
     - text: "Home"
       href: index.html
-    - text: "Journal"
-      href: Journal.html
+    - text: "The paper"
+      href: Dataset1-25-dec.html
     - text: "Links"
       href: Links.html
 output_dir: "docs"
