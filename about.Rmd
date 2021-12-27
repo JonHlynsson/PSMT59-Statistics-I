@@ -7,14 +7,26 @@ output:
     toc_float: no
     includes:
       after_body: docs/after.html
+      before_body: docs/before.html
 ---
 
-## The data
+### The data
 
 The data for this assignment is hosted on GitHub. [Click here](https://github.com/JonHlynsson/PSMT59-Statistics-I/tree/master/data) to be taken to the repository.
 
 <br><br>
 
-## The slides
+### The slides
 
 The slides for this assignment are embedded in the [**Slides**](https://jonhlynsson.github.io/PSMT59-Statistics-I/Links.html) tab above. Alternatively, [**click here**](https://jonhlynsson.github.io/PSMT59-Statistics-I/slides.html) to view the slides in full screen.
+
+
+<div class="col-sm-6">
+
+#### Project Hlynsson is also live at [YouTube](https://www.youtube.com/channel/UC8KVPSlpugcmWHFQYSAD4eA)
+
+
+
+![](images/ProjectHlynsson.jpg){width=150px align="right"}
+
+</div>

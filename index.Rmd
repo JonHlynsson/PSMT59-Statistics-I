@@ -4,6 +4,7 @@ output:
   html_document:
     includes:
       after_body: docs/after.html
+      before_body: docs/before.html
     theme: flatly
 ---
 
@@ -28,14 +29,15 @@ output:
 
 Welcome to my landing page for my individual assignment. 
 
+<br><br><br>
+**Note:** This page is still under construction! 
+
 
 </div>
 <div class="col-sm-6">
-
-### Project Hlynsson is also live at [YouTube](https://www.youtube.com/channel/UC8KVPSlpugcmWHFQYSAD4eA)
-
-
-
 ![](images/ProjectHlynsson.jpg){width=150px align="right"}
 
 </div>
+
+
+
