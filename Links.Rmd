@@ -3,14 +3,13 @@ title: "Slides"
 output:  
   html_document:
     theme: flatly
+    includes:
+      after_body: docs/after.html
 ---
 
 
 
-**This page is under construction.**
-
-
-The slides are also under construction. 
+**The slides are under construction.**
 
 
 ```{r, echo=F}

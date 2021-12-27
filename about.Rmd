@@ -5,6 +5,8 @@ output:
     theme: flatly
     toc: no
     toc_float: no
+    includes:
+      after_body: docs/after.html
 ---
 
 ## The data
