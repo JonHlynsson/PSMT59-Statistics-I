@@ -4,6 +4,12 @@ output: html_document
 ---
 
 
-# Resources
 
 **This page is under construction.**
+
+
+
+```{r, echo=F}
+knitr::include_url('slides.html')
+```
+

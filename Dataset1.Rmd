@@ -70,7 +70,6 @@ library(rstanarm) # for Bayesian models
 ## -------------------------------------------------------------------------
 ```
 
-[**Click here**](https://jonhlynsson.github.io/PSMT59-Statistics-I/) to navigate to the website that accompanies this assignment.
 
 # An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes
 
