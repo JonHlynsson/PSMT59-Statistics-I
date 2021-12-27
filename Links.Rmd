@@ -1,5 +1,5 @@
 ---
-title: "Resources"
+title: "Slides"
 output:  
   html_document:
     theme: flatly
@@ -9,6 +9,8 @@ output:
 
 **This page is under construction.**
 
+
+The slides are also under construction. 
 
 
 ```{r, echo=F}

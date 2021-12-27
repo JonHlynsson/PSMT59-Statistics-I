@@ -27,9 +27,7 @@ This page is under construction.
 </div>
 <div class="col-sm-6">
 
-### [Crump Lab: Human Cognition and Performance](https://crumplab.github.io)
+### Project Hlynsson is also live at [YouTube](https://www.youtube.com/channel/UC8KVPSlpugcmWHFQYSAD4eA)
+![](images/ProjectHlynsson.jpg){width=100px}
 
-<a href = "https://crumplab.github.io">
-![](images/logo.png)
-</a>
 </div>

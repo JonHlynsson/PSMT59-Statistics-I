@@ -86,7 +86,7 @@ I will work on a subset of @vanhedgerCricketChirpsCar2019 data from the aricle *
 Table 1.1 shows descriptive statistics for the dataset.
 
 ```{r Read in data, results='hide', class.source = "fold-hide", echo=F}
-d_full <- read.table("https://raw.githubusercontent.com/JonHlynsson/PSMT59-Statistics-I/main/data/d1_soundscape.txt", 
+d_full <- read.table("https://raw.githubusercontent.com/JonHlynsson/PSMT59-Statistics-I/master/data/d1_soundscape.txt", 
                      header = T, sep = ",")
 ```
 
@@ -598,7 +598,7 @@ WC # Character count is 4088 and thus NOT< 4000 == BUT I referenced all packages
 ```{r creation of sub-dataset, results='show', class.source = "fold-show", comment=""}
 # read in data from OSF. It can be downloaded from: https://osf.io/5ub4c/
 # alrenativly, I have uploaded it to my GitHub for convinience 
-dor <- read.table("https://raw.githubusercontent.com/JonHlynsson/PSMT59-Statistics-I/main/data/d1_rawdata_from_osf.txt",
+dor <- read.table("https://raw.githubusercontent.com/JonHlynsson/PSMT59-Statistics-I/master/data/d1_rawdata_from_osf.txt",
                   header = T, sep = ",")
 
 # select appropriate columns 

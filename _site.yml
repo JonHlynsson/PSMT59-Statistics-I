@@ -4,10 +4,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "The paper"
+    - text: "Paper"
       href: Dataset1.html
-    - text: "Links"
+    - text: "Slides"
       href: Links.html
-    - text: "The slides"
-      href: slides.html
+    - text: "About"
+      href: about.html
 output_dir: "docs"

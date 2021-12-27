@@ -1,0 +1,17 @@
+---
+title: "About"
+output: 
+  html_document:
+    theme: flatly
+    toc: no
+    toc_float: no
+---
+
+## The data
+
+The data for this assignment is hosted on GitHub. [Click here](https://github.com/JonHlynsson/PSMT59-Statistics-I/tree/master/data) to be taken to the repository.
+
+<br><br>
+## The slides
+
+The slides for this assignment are embedded in the [**Slides**](https://jonhlynsson.github.io/PSMT59-Statistics-I/Links.html) tab above. Alternatively, [**click here**](https://jonhlynsson.github.io/PSMT59-Statistics-I/slides.html) to view the slides in full screen.
