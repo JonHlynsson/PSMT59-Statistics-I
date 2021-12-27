@@ -11,8 +11,7 @@ output:
 
 ![](images/Banner.jpg)
 
-<div class="row" style="padding-top: 30px;">
-<div class="col-sm-6">
+
 ### The data
 
 The data for this assignment is hosted on GitHub. [Click here](https://github.com/JonHlynsson/PSMT59-Statistics-I/tree/master/data) to be taken to the repository.
@@ -24,7 +23,7 @@ The data for this assignment is hosted on GitHub. [Click here](https://github.co
 The slides for this assignment are embedded in the [**Slides**](https://jonhlynsson.github.io/PSMT59-Statistics-I/Links.html) tab above. Alternatively, [**click here**](https://jonhlynsson.github.io/PSMT59-Statistics-I/slides.html) to view the slides in full screen.
 </div>
 
-<div class="col-sm-6">
+
 
 <hr>
 ### Project Hlynsson is also live at [YouTube](https://www.youtube.com/channel/UC8KVPSlpugcmWHFQYSAD4eA)
@@ -36,4 +35,3 @@ The slides for this assignment are embedded in the [**Slides**](https://jonhlyns
 
 <br><br><br>
 `r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
-</div>

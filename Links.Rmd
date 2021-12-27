@@ -18,7 +18,6 @@ knitr::include_url('slides.html')
 
 
 
-<div class="col-sm-6">
+
 <br><br><br>
 `r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
-</div>

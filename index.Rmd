@@ -8,21 +8,6 @@ output:
 
 ![](images/Banner.jpg)
 
-
-<style type="text/css">
-.title {
-  display: none;
-}
-
-#getting-started img {
-  margin-right: 10px;
-}
-
-</style>
-
-<div class="row" style="padding-top: 30px;">
-<div class="col-sm-6">
-
 # **Individual assignment**
 
 Welcome to my landing page for my individual assignment. 
@@ -31,8 +16,8 @@ Welcome to my landing page for my individual assignment.
 **Note:** This page is still under construction! 
 
 
-</div>
-<div class="col-sm-6">
+
+
 ![](images/ProjectHlynsson.jpg){width=150px align="right"}
 
 
@@ -41,4 +26,3 @@ Welcome to my landing page for my individual assignment.
 
 <br><br><br>
 `r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
-</div>
