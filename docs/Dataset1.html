@@ -11,7 +11,7 @@
 
 <meta name="author" content="Jon Ingi Hlynsson jon.ingi.hlynsson@gmail.com" />
 
-<meta name="date" content="2021-12-27" />
+<meta name="date" content="2021-12-28" />
 
 <title>Individual assignment</title>
 
@@ -305,7 +305,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Individual assignment</h1>
 <h4 class="author">Jon Ingi Hlynsson <sub><a href="mailto:jon.ingi.hlynsson@gmail.com" class="email">jon.ingi.hlynsson@gmail.com</a><sub></h4>
-<h4 class="date">2021-12-27</h4>
+<h4 class="date">2021-12-28</h4>
 
 </div>
 
@@ -327,8 +327,8 @@ $(document).ready(function () {
 
 <div id="an-exposure-to-a-natural-soundscape-improves-cognitive-performance-on-cognitive-tasks-when-compared-to-urban-soundscapes" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes</h1>
-<p>The following paper is made using R: A lanuage and encironment for statistical computing <span class="citation">(R Core Team, 2021)</span> and RMarkdown <span class="citation">(Xie et al., 2020)</span>. In it I will examine whether exposure to sounds from nature <strong>improves performance</strong> on cognitive tests measuring directed attention.</p>
-<p>I will work on a subset of <span class="citation">Van Hedger et al. (2019)</span> data from the aricle <em>Of cricket chirps and car horns: The effect of nature sounds on cognitive performance</em>, data available on the Open Science Framework (<a href="https://osf.io/5ub4c/" class="uri">https://osf.io/5ub4c/</a>)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<p>The following paper is made using <strong><em>RStudio</em></strong><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> <span class="citation">(R Core Team, 2021)</span> and RMarkdown <span class="citation">(Xie et al., 2020)</span>. In it I will examine whether exposure to sounds from nature <strong>improves performance</strong> on cognitive tests measuring directed attention.</p>
+<p>I will work on a subset of <span class="citation">Van Hedger et al. (2019)</span> data from the aricle <em>Of cricket chirps and car horns: The effect of nature sounds on cognitive performance</em>, data available on the Open Science Framework (<a href="https://osf.io/5ub4c/" class="uri">https://osf.io/5ub4c/</a>)<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
 <p><span class="citation">Van Hedger et al. (2019)</span> hypotezised that individuals exposed to <em>natural soundscapes</em> would perform better on the cognitive tasks compared to individuals exposed to urban soundscapes.
 <br></p>
 <div id="data-screening" class="section level2" number="1.1">
@@ -564,7 +564,7 @@ Guessed purpose of experiment
 </div>
 <div id="replication-analysis" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Replication analysis</h2>
-<p>An interaction plot can be produced to replicate <span class="citation">Van Hedger et al. (2019)</span>’s results, see figure 1.1. It should be noted that <span class="citation">Van Hedger et al. (2019)</span> perform perform two analysis’s; (a) an ANOVA with all participants, and (b) an ANOVA with naïve participants only<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
+<p>An interaction plot can be produced to replicate <span class="citation">Van Hedger et al. (2019)</span>’s results, see figure 1.1. It should be noted that <span class="citation">Van Hedger et al. (2019)</span> perform perform two analysis’s; (a) an ANOVA with all participants, and (b) an ANOVA with naïve participants only<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="Dataset1_files/figure-html/unnamed-chunk-2-1.png" alt="Effects plot replicating @vanhedgerCricketChirpsCar2019" width="75%" />
 <p class="caption">
@@ -663,7 +663,7 @@ Naïve
 <p>To better get an idea of the effect apparent in figure 1.1, a Bayesian linear regression on the difference score between pre-test and post-test was conducted. The results indicated that participants exposed to natural soundscape performed better on attentional test measures. The data is compatible with an increase of 0.48 standardized units in performance among participants.</p>
 <p>However, point-estimates can be deceiving a 89% compatibility interval was performed on the standardized improvement among the participants exposed to naturalistic soundscapes. The 89% compatibility interval was chosen as an alternative to the 95% custom because the number <em>89</em> is a Prime number <span class="citation">(McElreath, 2020a)</span>.</p>
 <p>The data is most compatible with ranges from 0.20 to 0.74, given our data and statistical model. Thus, the data indicates that a naturalistic soundscape has the potential to affect cognitive measures, as measured by the <code>DNB</code> and <code>BDS</code> attentional tasks described above.</p>
-<p><span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\)</span> is a crude model and doesn’t account for participant nativity. Thus a model with nativity and soundscape type could add accuracy to the predictions<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<p><span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\)</span> is a crude model and doesn’t account for participant nativity. Thus a model with nativity and soundscape type could add accuracy to the predictions<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
 <p>However, it’s necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those whom were naïve to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models.
 <br><br></p>
 <div id="posterior-distribution-plots" class="section level3" number="1.3.1">
@@ -777,9 +777,10 @@ head(d_full)</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>See Apendix I for how the subset was derived<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>Relevant ANOVA descriptives can be found in supplementary table 1.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>i.e., <span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\:+\:\mathrm{Participant\:Nativity}\)</span><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>A language and environment for statistical computing<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>See Apendix I for how the subset was derived<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Relevant ANOVA descriptives can be found in supplementary table 1.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>i.e., <span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\:+\:\mathrm{Participant\:Nativity}\)</span><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 

@@ -74,7 +74,7 @@ library(rstanarm) # for Bayesian models
 # An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes
 
 
-The following paper is made using R: A lanuage and encironment for statistical computing [@rcoreteamLanguageEnvironmentStatistical2021] and RMarkdown [@xieMarkdownCookbook2020]. In it I will examine whether exposure to sounds from nature **improves performance** on cognitive tests measuring directed attention. 
+The following paper is made using ***RStudio***^[A language and environment for statistical computing] [@rcoreteamLanguageEnvironmentStatistical2021] and RMarkdown [@xieMarkdownCookbook2020]. In it I will examine whether exposure to sounds from nature **improves performance** on cognitive tests measuring directed attention. 
 
 I will work on a subset of @vanhedgerCricketChirpsCar2019 data from the aricle *Of cricket chirps and car horns: The effect of nature sounds on cognitive performance*, data available on the Open Science Framework (https://osf.io/5ub4c/)^[See Apendix I for how the subset was derived].
 
@@ -582,7 +582,7 @@ The following packages were used:
 
 ```{r word count, message=F, warning=F, include=F}
 WC <- wordcountaddin::text_stats()
-WC # Character count is 4262 and thus NOT< 4000 == BUT I referenced all packages
+WC # Character count is 4276 and thus NOT< 4000 == BUT I referenced all packages
 # ergo, no deduction in points
 # Note to self - I NEED TO SHORTEN THIS A BIT
 ```
