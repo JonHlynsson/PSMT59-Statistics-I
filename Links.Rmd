@@ -3,12 +3,9 @@ title: "Slides"
 output:  
   html_document:
     theme: flatly
-    includes:
-      after_body: docs/after.html
-      before_body: docs/before.html
 ---
 
-
+![](images/Banner.jpg)
 
 **The slides are under construction.**
 
@@ -17,3 +14,9 @@ output:
 knitr::include_url('slides.html')
 ```
 
+
+
+<div class="col-sm-6">
+<br><br><br>
+`r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
+</div>

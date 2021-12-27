@@ -2,13 +2,11 @@
 title: "Individual assignment"
 output: 
   html_document:
-    includes:
-      after_body: docs/after.html
-      before_body: docs/before.html
     theme: flatly
 ---
 
 
+![](images/Banner.jpg)
 
 
 <style type="text/css">
@@ -40,4 +38,7 @@ Welcome to my landing page for my individual assignment.
 </div>
 
 
-
+<div class="col-sm-6">
+<br><br><br>
+`r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
+</div>
