@@ -1,6 +1,8 @@
 ---
 title: "Individual assignment"
-output: html_document
+output: 
+  html_document:
+    theme: flatly
 ---
 
 <style type="text/css">
