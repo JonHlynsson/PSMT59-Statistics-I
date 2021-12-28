@@ -4,10 +4,25 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+      icon: fa-home
     - text: "Paper"
       href: Dataset1.html
+      icon: fa-file-text
     - text: "Slides"
       href: Links.html
+      icon: fa-film
     - text: "About"
       href: about.html
+      icon: fa-question-circle
+    # - text: "Supplementary material"
+    #   menu:
+    #   - text: "Supplementary tables"
+    #     href: tables.html
+    #     icon: fa-resistance
+    #   - text: "Test"
+    #     href: test.html
 output_dir: "docs"
+
+
+# fa-resistance - fa-file-text - fa-r-project
+# https://www.w3schools.com/icons/icons_reference.asp
