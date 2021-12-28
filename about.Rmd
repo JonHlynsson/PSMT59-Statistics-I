@@ -32,6 +32,6 @@ The slides for this assignment are embedded in the [**Slides**](https://jonhlyns
 
 ![](images/ProjectHlynsson.jpg){width=150px align="right"}
 
-
+<hr>
 <br><br><br>
 `r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
