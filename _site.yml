@@ -1,4 +1,5 @@
 name: "Individual assignment"
+icon: fa-empire
 navbar:
   title: "Individual assignment"
   left:
