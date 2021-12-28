@@ -1,27 +1,42 @@
 ---
-title: "Individual assignment"
+title: "Home"
 output: 
   html_document:
     theme: flatly
+    css: default.css
+bibliography: refs.bib
+citation-style: apa-annotated-bibliography.csl
 ---
 
 
 ![](images/Banner.jpg)
 
+
 # **Individual assignment**
 
-Welcome to my landing page for my individual assignment. 
 
-<br><br><br>
-**Note:** This page is still under construction! 
-
+Welcome to my landing page for my individual assignment. Here you can find all data related to my individual assignment in the course **PSMT59: Statistics I**.
+<br><br>
 
 
 
+<div class="pull-left">
+This page includes all relevant links for a replication analysis with data from @vanhedgerCricketChirpsCar2019 article: Of cricket chirps and car horns: The effect of nature sounds on cognitive performance.
+</div>
+
+
+<div class="pull-right">
 ![](images/ProjectHlynsson.jpg){width=150px align="right"}
+</div>
+<br><br><br><br><br><br><br><br>
+
+Special thanks to [Mats Nilsson](https://www.su.se/profiles/matni-1.184039), the course's leader in [**PSMT59: Statistics I**](https://www.su.se/english/search-courses-and-programmes/psmt59-1.487437). 
+
+
+<br><br><br><br><br><br><br><br>
+
+### References 
+<div id="refs"></div>
 
 <hr>
-
-
-<br><br><br>
 `r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
