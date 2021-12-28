@@ -583,7 +583,7 @@ The following packages were used:
 
 ```{r word count, message=F, warning=F, include=F}
 WC <- wordcountaddin::text_stats()
-WC # Character count is 4270 and thus NOT< 4000 == BUT I referenced all packages
+WC # Character count is 4309 and thus NOT< 4000 == BUT I referenced all packages
 # ergo, no deduction in points
 # Note to self - I NEED TO SHORTEN THIS A BIT
 ```
