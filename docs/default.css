@@ -1,4 +1,12 @@
 /* The styles for this page */
+
+:root {
+  --text-color: #000000;
+  --header-color: #1381B0;
+  --text-bold-color: #4c516d
+  --link-color: #000263;
+}
+
 html {
   font-size: var(--base-font-size);
 }
@@ -16,11 +24,15 @@ h1, h2, h3 {
 
 .pull-left {
   float: left;
-  width: 47%;
+  width: 50%;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .pull-right {
   float: right;
-  width: 47%;
+  width: 50%;
+  text-align: justify;
+  text-justify: inter-word;
 }
 

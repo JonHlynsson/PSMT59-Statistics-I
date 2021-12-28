@@ -11,13 +11,13 @@ output:
 #
 
 ![](images/Banner.jpg)
-
+<hr>
 
 ### The data
 
 The data for this assignment is hosted on GitHub. [Click here](https://github.com/JonHlynsson/PSMT59-Statistics-I/tree/master/data) to be taken to the repository.
 
-<br><br>
+<hr>
 
 ### The slides
 
@@ -29,7 +29,7 @@ The slides for this assignment are embedded in the [**Slides**](https://jonhlyns
 <hr>
 
 
-### Project Hlynsson is also live on [YouTube](https://www.youtube.com/channel/UC8KVPSlpugcmWHFQYSAD4eA)
+### Project Hlynsson is also live on **YouTube**!
 
 
 As of December 2021, the YouTube channel only includes videos in Icelandic. However, that is subject to change so [**stay tuned**](https://www.youtube.com/channel/UC8KVPSlpugcmWHFQYSAD4eA)!

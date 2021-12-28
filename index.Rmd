@@ -28,6 +28,9 @@ This page includes all relevant links for a replication analysis with data from 
 <div class="pull-right">
 ![](images/ProjectHlynsson.jpg){width=150px align="right"}
 </div>
+
+\newpage
+
 <br><br><br><br><br><br><br><br>
 
 Special thanks to [Mats Nilsson](https://www.su.se/profiles/matni-1.184039), the course's leader in [**PSMT59: Statistics I**](https://www.su.se/english/search-courses-and-programmes/psmt59-1.487437). 
