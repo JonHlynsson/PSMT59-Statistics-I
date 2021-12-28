@@ -76,9 +76,9 @@ library(rstanarm) # for Bayesian models
 
 The following paper is made using ***RStudio***^[A language and environment for statistical computing] [@rcoreteamLanguageEnvironmentStatistical2021] and RMarkdown [@xieMarkdownCookbook2020]. In it I will examine whether exposure to sounds from nature **improves performance** on cognitive tests measuring directed attention. 
 
-I will work on a subset of @vanhedgerCricketChirpsCar2019 data from the aricle *Of cricket chirps and car horns: The effect of nature sounds on cognitive performance*, data available on the Open Science Framework (https://osf.io/5ub4c/)^[See Apendix I for how the subset was derived].
+I will work on a subset of @vanhedgerCricketChirpsCar2019 data from the article *Of cricket chirps and car horns: The effect of nature sounds on cognitive performance*, data available on the Open Science Framework (https://osf.io/5ub4c/)^[See Apendix I for how the subset was derived].
 
-@vanhedgerCricketChirpsCar2019 hypotezised that individuals exposed to *natural soundscapes* would perform better on the cognitive tasks compared to individuals exposed to urban soundscapes.
+@vanhedgerCricketChirpsCar2019 hypothesised that individuals exposed to *natural soundscapes* would perform better on the cognitive tasks compared to individuals exposed to urban soundscapes.
 <br>
 
 ## Data screening
@@ -223,7 +223,7 @@ psych::describe(d)
 
 ## Replication analysis
 
-An interaction plot can be produced to replicate @vanhedgerCricketChirpsCar2019's results, see figure 1.1. It should be noted that @vanhedgerCricketChirpsCar2019 perform perform two analysis's; (a) an ANOVA with all participants, and (b) an ANOVA with naïve participants only^[Relevant ANOVA descriptives can be found in supplementary table 1.].
+An interaction plot can be produced to replicate @vanhedgerCricketChirpsCar2019's results, see figure 1.1. It should be noted that @vanhedgerCricketChirpsCar2019 perform two analysis's; (a) an ANOVA with all participants, and (b) an ANOVA with naïve participants only^[Relevant ANOVA descriptives can be found in supplementary table 1.].
 
 
 ```{r supplementary table 1, include=F}
@@ -578,11 +578,12 @@ The following packages were used:
 - tidyverse [@Tidyverse2019]
 - knitr [@Knitr2014]
 - kableExrta [@KableExtra2021]
+- wordcountaddin [@wordcountaddin2021]
 
 
 ```{r word count, message=F, warning=F, include=F}
 WC <- wordcountaddin::text_stats()
-WC # Character count is 4276 and thus NOT< 4000 == BUT I referenced all packages
+WC # Character count is 4270 and thus NOT< 4000 == BUT I referenced all packages
 # ergo, no deduction in points
 # Note to self - I NEED TO SHORTEN THIS A BIT
 ```
