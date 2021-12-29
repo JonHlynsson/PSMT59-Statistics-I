@@ -7,8 +7,17 @@ navbar:
       href: index.html
       icon: fa-home
     - text: "Paper"
-      href: Dataset1.html
-      icon: fa-file-text
+      icon: fa-file-text 
+      menu: 
+      - text: "The Assignment"
+        href: Dataset1.html
+        icon: fa-paperclip
+      - text: "Supplementary Material"
+        href: sup.html
+        icon: fa-table
+      - text: "Code Book"
+        href: codebook.html
+        icon: fa-code
     - text: "Slides"
       href: Links.html
       icon: fa-film
