@@ -30,7 +30,7 @@ strong {
 
 .pull-left {
   float: left;
-  width: 50%;
+  width: 45%;
   text-align: justify;
   text-justify: inter-word;
 }
@@ -38,7 +38,7 @@ strong {
 
 .pull-right {
   float: right;
-  width: 50%;
+  width: 45%;
   text-align: justify;
   text-justify: inter-word;
 }
