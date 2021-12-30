@@ -42,6 +42,11 @@ style_duo_accent(
   inverse_header_color = "#FFFFFF",
   inverse_background_color = "#4c516d"
 )
+library(xaringanExtra)
+# use_share_again()
+# use_progress_bar(color = "red", location = "top", height = "1")
+# html_dependency_search()
+
 ```
 
 class: center, middle

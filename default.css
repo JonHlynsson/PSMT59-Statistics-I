@@ -22,12 +22,19 @@ h1, h2, h3 {
   color: var(--header-color);
 }
 
+strong {
+  font-weight: bold;
+  color: var(--text-bold-color);
+}
+
+
 .pull-left {
   float: left;
   width: 50%;
   text-align: justify;
   text-justify: inter-word;
 }
+
 
 .pull-right {
   float: right;

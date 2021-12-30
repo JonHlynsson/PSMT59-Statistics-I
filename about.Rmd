@@ -21,8 +21,9 @@ The data for this assignment is hosted on GitHub. [Click here](https://github.co
 
 ### The slides
 
+
 The slides for this assignment are embedded in the [**Slides**](https://jonhlynsson.github.io/PSMT59-Statistics-I/Links.html) tab above. Alternatively, [**click here**](https://jonhlynsson.github.io/PSMT59-Statistics-I/slides.html) to view the slides in full screen.
-</div>
+
 
 
 
@@ -35,9 +36,11 @@ The slides for this assignment are embedded in the [**Slides**](https://jonhlyns
 As of December 2021, the YouTube channel only includes videos in Icelandic. However, that is subject to change so [**stay tuned**](https://www.youtube.com/channel/UC8KVPSlpugcmWHFQYSAD4eA)!
 
 
-<div class="pull-right">
+:::::{.pull-right}
 ![](images/ProjectHlynsson.jpg){width=150px align="right"}
-</div>
+:::::
+
+
 <br><br><br><br><br><br><br><br>
 
 

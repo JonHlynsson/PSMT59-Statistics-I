@@ -163,10 +163,11 @@ dstat$sd_out <- aggregate(list(sd_out = d$CogTest),
                    list(condition = d$soundscape_type, time = d$testing), 
                    sd, na.rm = TRUE)$sd_out
 
-dstat %>% select(c("condition", "outcome", "sd_out")) %>%  kable(digits = 2,
-                caption = "Supplementary table 1. Means and standard deviations by soundscape type and time of testing", 
-                align = c("l", "c", "c", "r"),
-                col.names = c("Type of soundscape", "Mean", "sd")) %>% 
+dstat %>% select(c("condition", "outcome", "sd_out")) %>%  
+  kable(digits = 2,
+        caption = "Supplementary table 1. Means and standard deviations by soundscape type and time of testing", 
+        align = c("l", "c", "c", "r"),
+        col.names = c("Type of soundscape", "Mean", "sd")) %>% 
   kable_classic() %>% 
   kable_styling(full_width = T, html_font = "Times") %>% 
   group_rows(group_label = "Pretest", start_row = 1, end_row = 2) %>% 
@@ -262,8 +263,9 @@ colnames(d2statAdjusted) <- c("Type of soundscape", "Naïvity of participants",
 
 <div align="center" style="font-family: Times;">Supplementary table 2. Descriptive statistics for the crude and adusted models</div>
 <br> 
+
 <div class="pull-left">
-```{r, results='hold', out.width="30%", include=T, echo=F}
+```{r, results='hold', out.width="10%", include=T, echo=F}
 # See supplementary table 2 for descriptives of the models
 
 # view descriptives for crude
@@ -274,7 +276,7 @@ d2statCrude %>% kable(digits = 2, caption = "Crude descriptives") %>%
 
 
 <div class="pull-right">
-```{r, results='hold', out.width="30%", include=T, echo=F}
+```{r, results='hold', out.width="10%", include=T, echo=F}
 # view descriptives for adjusted
 d2statAdjusted %>% select(c("Type of soundscape", "Mean", "sd")) %>% 
   kable(digits = 2, caption = "Adjusted descriptives") %>% 
