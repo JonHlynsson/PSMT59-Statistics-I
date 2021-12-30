@@ -264,36 +264,39 @@ colnames(d2statAdjusted) <- c("Type of soundscape", "Naïvity of participants",
 
 <br> 
 
-<div class="pull-left">
 ```{r, results='hold', out.width="10%", include=T, echo=F, size="50%"}
 # See supplementary table 2 for descriptives of the models
 
 # view descriptives for crude
-c <- d2statCrude %>% kable(digits = 2, caption = "Crude descriptives") %>% 
-  kable_classic() %>% kable_styling(full_width = T)
+c <- d2statCrude %>% kable(digits = 2, caption = "***Crude descriptives***") %>% 
+  kable_classic() %>% kable_styling(full_width = T, html_font = "Times")
 ```
-</div>
 
 
-<div class="pull-right">
 ```{r, results='hold', out.width="10%", include=T, echo=F, size="50%"}
 # view descriptives for adjusted
 a <- d2statAdjusted %>% select(c("Type of soundscape", "Mean", "sd")) %>% 
-  kable(digits = 2, col.names = c("Adjusted descriptives", "", "")) %>% 
+  kable(digits = 2, col.names = c("***Adjusted descriptives***", "", "")) %>% 
   kable_classic() %>% 
-  kable_styling(full_width = T, ) %>% 
-  group_rows(group_label = "Naïve participants", start_row = 1, end_row = 2) %>% 
-  group_rows(group_label = "Non-naïve participants", start_row = 3, end_row = 4)
+  kable_styling(full_width = T, html_font = "Times") %>% 
+  group_rows(group_label = "Naïve participants", start_row = 1, end_row = 2, indent = F) %>% 
+  group_rows(group_label = "Non-naïve participants", start_row = 3, end_row = 4, indent = F)
 ```
-</div>
 
+
+:::::{.pull-left}
 <div style="font-family: Times;">Supplementary table 2. Descriptive statistics for the crude and adjusted models</div>
+
+
 ```{r, echo=F}
 c
 a
 ```
+:::::
 
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 Supplimentary table 2 shows the means and dispersion of the crude and adjusted models.
+
+<br><br><br><br><br><br><br><br><hr>
+`r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
+

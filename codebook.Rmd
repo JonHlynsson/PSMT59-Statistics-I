@@ -28,3 +28,8 @@ citation-style: apa-annotated-bibliography.csl
 - `dnb_post`: Post-test results of the dual n-back task (DNB)
 - `guessed_purpose`: Whether the participant guessed (1) or not (0) the purpose of the experiment
 
+
+
+
+<br><br><br><br><br><br><br><br><hr>
+`r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`
