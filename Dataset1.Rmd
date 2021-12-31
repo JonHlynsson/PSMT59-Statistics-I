@@ -476,6 +476,18 @@ d2statAdjusted %>% kable(digits = 2, caption = "Adjusted descriptives") %>%
 ```{r, fig.cap="Visualization of Regression Lines From the Posterior Distribution\n\n (Blue dots indicate the arithmetic mean value)", include=T, message=F, fig.align='center', echo=F}
 library(rethinking) # for coloring lines 
 
+## create CI function
+add_ci <- function(m, c = 2, coef = 2, xpos = 1){
+  point_est <- m$coefficients[c]  
+  ci89 <- posterior_interval(m, level = 0.89)[coef, ]         # # 89 % CI
+  
+  # Draw CI 89 %
+  arrows(x0 = xpos, x1 = xpos, y0 = ci89[1], y1 = ci89[2], 
+         angle = 90, code = 3, length = 0.0)
+    # Draw point estimate
+  points(xpos, point_est, pch = 21, bg = "skyblue")
+}
+
 par(mfrow = c(1, 2), font = 1) # 1 column, 2 rows for the figure to be plotted
 
 # jitter - random noisy with mean 0 and sd 0.05 that is then added to the
@@ -520,6 +532,10 @@ for ( i in 1:20 ) {
          col=col.alpha("black", 0.2) , add=TRUE ,from = 1, to = 2)}
 mtext(text = "Crude model", side = 3)
 
+## add CI 
+add_ci(crude, c = 1, coef = 1, xpos = 1)
+# add_ci(crude, c = c(1+2), coef = c(1+2), xpos = 2)
+
 
 ## adjusted model ----
 plot(as.numeric(d2$soundscape_type) + jitter, # soundscape as numeric (1 = Urban, 2 = Natural)
@@ -560,12 +576,43 @@ for ( i in 1:20 ) {
          col=col.alpha("black", 0.2) , add=TRUE ,from = 1, to = 2)}
 mtext(text = "Adjusted model", side = 3)
 
-
+## add ci
+# c = coeficients in point estimate
+# coef= post interval
+add_ci(adjusted, c = 1, coef = c(2,3), xpos = 1)
+# add_ci(adjusted, c = c(2, 3), coef = c(1, 2,3), xpos = 2)
+# adjusted$coefficients[c(2+3)]
+# posterior_interval(adjusted)[c(1, 2,3), ]
 ```
 
 As figure 1.2 shows, more uncertainty is in the *adjusted model* in comparison to the *crude model*. This result is somewhat surprising, given that nativity was statistically controlled instead of omitting participants.
 
 <br><br>
+
+
+
+```{r, echo=F, include=F}
+# New figure 1.2
+# crude
+jitt <- runif(nrow(d2), -.03, .03)
+plot(as.numeric(d2$soundscape_type) + jitt, d2$CogTest, xlab="Soundscape Type",
+ylab="Composite score", bty="l", pch=20, xaxt="n", yaxt="n")
+
+sims <- as.matrix(crude)
+n_sims <- nrow(sims)
+sims_display <- sample(n_sims, 10)
+
+CogTest_bar <- mean(d2$CogTest)
+
+for (i in sims_display){
+curve(cbind(1, x, CogTest_bar) %*% sims[i,1:3], lwd=0.5, col="gray", add=TRUE)
+}
+curve(cbind(1, x) %*% coef(crude), col="black", add=TRUE)
+lines(x = c(1, 2), y = c(cf0[1], cf0[1]+cf0[2]), lwd = 1, col = "blue")
+```
+
+
+
 
 #### R packages
 
