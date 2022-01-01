@@ -476,18 +476,6 @@ d2statAdjusted %>% kable(digits = 2, caption = "Adjusted descriptives") %>%
 ```{r, fig.cap="Visualization of Regression Lines From the Posterior Distribution\n\n (Blue dots indicate the arithmetic mean value)", include=T, message=F, fig.align='center', echo=F}
 library(rethinking) # for coloring lines 
 
-## create CI function
-add_ci <- function(m, c = 2, coef = 2, xpos = 1){
-  point_est <- m$coefficients[c]  
-  ci89 <- posterior_interval(m, level = 0.89)[coef, ]         # # 89 % CI
-  
-  # Draw CI 89 %
-  arrows(x0 = xpos, x1 = xpos, y0 = ci89[1], y1 = ci89[2], 
-         angle = 90, code = 3, length = 0.0)
-    # Draw point estimate
-  points(xpos, point_est, pch = 21, bg = "skyblue")
-}
-
 par(mfrow = c(1, 2), font = 1) # 1 column, 2 rows for the figure to be plotted
 
 # jitter - random noisy with mean 0 and sd 0.05 that is then added to the
@@ -506,13 +494,28 @@ plot(as.numeric(d2$soundscape_type) + jitter, # soundscape as numeric (1 = Urban
 
 # add regression lines
 cf0 <- crude$coefficients
-lines(x = c(1, 2), y = c(cf0[1], cf0[1]+cf0[2]), lwd = 1, col = "blue")
+lines(x = c(1, 2), y = c(cf0[1], cf0[1]+cf0[2]), lwd = 2, col = "skyblue")
+
+## add CI to figures
+crudeci_Inter <- posterior_interval(crude)[1, ] # extract posterior interval for
+# soundscape = U
+crudeci_Sound <- posterior_interval(crude)[2, ] # extract posterior interval for
+# soundscape = N
+
+# draw CI bands
+arrows(x0 = 1, x1 = 1, 
+       y0 = crudeci_Inter[1], y1 = crudeci_Inter[2], 
+       length = 0.1, angle = 90, code = 3, lty = 1, col = "purple4", lwd = 2)
+arrows(x0 = 2, x1 = 2, 
+       y0 = crudeci_Sound[1], y1 = crudeci_Sound[2], 
+       length = 0.1, angle = 90, code = 3, lty = 1, col = "purple4", lwd = 2)
+
 
 # add points
 points(c(1, 2), 
        c(mean(d2$CogTest[d2$soundscape_type == "U"]), 
          mean(d2$CogTest[d2$soundscape_type == "N"])),
-       pch = 21, bg = "skyblue", cex = 1.5)
+       pch = 21, bg = "skyblue", cex = 1.5, col = "purple4")
 # Add x-axis labels
 axis(1, at = c(1, 2), labels = c('Urban', 'Natural'))
 # add y-axis
@@ -532,10 +535,6 @@ for ( i in 1:20 ) {
          col=col.alpha("black", 0.2) , add=TRUE ,from = 1, to = 2)}
 mtext(text = "Crude model", side = 3)
 
-## add CI 
-add_ci(crude, c = 1, coef = 1, xpos = 1)
-# add_ci(crude, c = c(1+2), coef = c(1+2), xpos = 2)
-
 
 ## adjusted model ----
 plot(as.numeric(d2$soundscape_type) + jitter, # soundscape as numeric (1 = Urban, 2 = Natural)
@@ -549,13 +548,28 @@ plot(as.numeric(d2$soundscape_type) + jitter, # soundscape as numeric (1 = Urban
 
 # add regression line
 cf1 <- adjusted$coefficients
-lines(x = c(1, 2), y = c(cf1[1], cf1[1]+cf1[2]+cf1[3]), lwd = 1, col = "blue")
+lines(x = c(1, 2), y = c(cf1[1], cf1[1]+cf1[2]+cf1[3]), lwd = 2, col = "skyblue")
+
+## add CI to figures
+adjustedci_Inter <- posterior_interval(adjusted)[1, ] # extract posterior 
+# interval for soundscape = U
+adjustedci_Sound <- posterior_interval(adjusted)[2, ] # extract posterior 
+# interval for soundscape = N
+
+# draw CI bands
+arrows(x0 = 1, x1 = 1, 
+       y0 = adjustedci_Inter[1], y1 = adjustedci_Inter[2], 
+       length = 0.1, angle = 90, code = 3, lty = 1, col = "purple4", lwd = 2)
+arrows(x0 = 2, x1 = 2, 
+       y0 = adjustedci_Sound[1], y1 = adjustedci_Sound[2], 
+       length = 0.1, angle = 90, code = 3, lty = 1, col = "purple4", lwd = 2)
+
 
 # add points
 points(c(1, 2), 
        c(mean(d2$CogTest[d2$soundscape_type == "U"]), 
          mean(d2$CogTest[d2$soundscape_type == "N"])),
-       pch = 21, bg = "skyblue", cex = 1.5)
+       pch = 21, bg = "skyblue", cex = 1.5, col = "purple4")
 
 # Add x-axis labels
 axis(1, at = c(1, 2), labels = c('Urban', 'Natural'))
@@ -575,14 +589,6 @@ for ( i in 1:20 ) {
   curve(fits2$intercept[i] + fits2$soundscape_typeN[i]*(x-mean(as.numeric(d2$soundscape_type))),
          col=col.alpha("black", 0.2) , add=TRUE ,from = 1, to = 2)}
 mtext(text = "Adjusted model", side = 3)
-
-## add ci
-# c = coeficients in point estimate
-# coef= post interval
-add_ci(adjusted, c = 1, coef = c(2,3), xpos = 1)
-# add_ci(adjusted, c = c(2, 3), coef = c(1, 2,3), xpos = 2)
-# adjusted$coefficients[c(2+3)]
-# posterior_interval(adjusted)[c(1, 2,3), ]
 ```
 
 As figure 1.2 shows, more uncertainty is in the *adjusted model* in comparison to the *crude model*. This result is somewhat surprising, given that nativity was statistically controlled instead of omitting participants.
