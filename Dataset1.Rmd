@@ -473,13 +473,37 @@ d2statAdjusted %>% kable(digits = 2, caption = "Adjusted descriptives") %>%
 
 
 
-```{r, fig.cap="Visualization of Regression Lines From the Posterior Distribution\n\n (Blue dots indicate the arithmetic mean value)", include=T, message=F, fig.align='center', echo=F}
+```{r, fig.cap="Visualization of Regression Lines From the Posterior Distribution\n\n (Blue dots indicate the arithmetic mean value)", include=T, message=F, fig.align='center', echo=F, results='hide'}
 library(rethinking) # for coloring lines 
+
+## First reparametrize the crude and adjusted models ----
+
+# First the reparametrize the crude model
+# I add a 0 to get no intercept
+crudeRe <- stan_glm(CogTest ~ 0 + soundscape_type,
+                  data = d2, 
+                  refresh = F, 
+                  seed = 1995)
+summary(crudeRe)
+posterior_interval(crudeRe) 
+
+# Then the reparametrize the adjusted model
+# I add a 0 to get no intercept
+adjustedRe <- stan_glm(CogTest ~ 0 + soundscape_type + guessed_purpose,
+                  data = d2, 
+                  refresh = F, 
+                  seed = 1995)
+summary(adjustedRe)
+posterior_interval(adjustedRe) 
+
+
+## Now plots can be drawn ----
 
 par(mfrow = c(1, 2), font = 1) # 1 column, 2 rows for the figure to be plotted
 
 # jitter - random noisy with mean 0 and sd 0.05 that is then added to the
 # -------- predictor to better identify the data points
+
 jitter <- rnorm(length(as.numeric(d2$soundscape_type)), mean = 0, sd = 0.05)
 
 ## crude model ----
@@ -497,17 +521,18 @@ cf0 <- crude$coefficients
 lines(x = c(1, 2), y = c(cf0[1], cf0[1]+cf0[2]), lwd = 2, col = "skyblue")
 
 ## add CI to figures
-crudeci_Inter <- posterior_interval(crude)[1, ] # extract posterior interval for
-# soundscape = U
-crudeci_Sound <- posterior_interval(crude)[2, ] # extract posterior interval for
-# soundscape = N
+
+# First extract posterior interval for Urban 
+crudeciU <- posterior_interval(crudeRe)[1, ] 
+# Then extract posterior interval for Natual  
+crudeciS <- posterior_interval(crudeRe)[2, ] 
 
 # draw CI bands
 arrows(x0 = 1, x1 = 1, 
-       y0 = crudeci_Inter[1], y1 = crudeci_Inter[2], 
+       y0 = crudeciU[1], y1 = crudeciU[2], 
        length = 0.1, angle = 90, code = 3, lty = 1, col = "purple4", lwd = 2)
 arrows(x0 = 2, x1 = 2, 
-       y0 = crudeci_Sound[1], y1 = crudeci_Sound[2], 
+       y0 = crudeciS[1], y1 = crudeciS[2], 
        length = 0.1, angle = 90, code = 3, lty = 1, col = "purple4", lwd = 2)
 
 
@@ -536,7 +561,7 @@ for ( i in 1:20 ) {
 mtext(text = "Crude model", side = 3)
 
 
-## adjusted model ----
+## Draw the adjusted model ----
 plot(as.numeric(d2$soundscape_type) + jitter, # soundscape as numeric (1 = Urban, 2 = Natural)
      d2$CogTest, 
      pch = 21, 
@@ -551,17 +576,19 @@ cf1 <- adjusted$coefficients
 lines(x = c(1, 2), y = c(cf1[1], cf1[1]+cf1[2]+cf1[3]), lwd = 2, col = "skyblue")
 
 ## add CI to figures
-adjustedci_Inter <- posterior_interval(adjusted)[1, ] # extract posterior 
-# interval for soundscape = U
-adjustedci_Sound <- posterior_interval(adjusted)[2, ] # extract posterior 
-# interval for soundscape = N
+
+# extract posterior interval for Urban 
+adjustedciU <- posterior_interval(adjustedRe)[1, ] 
+
+# extract posterior interval for Natural 
+adjustedciS <- posterior_interval(adjustedRe)[2, ]
 
 # draw CI bands
 arrows(x0 = 1, x1 = 1, 
-       y0 = adjustedci_Inter[1], y1 = adjustedci_Inter[2], 
+       y0 = adjustedciU[1], y1 = adjustedciU[2], 
        length = 0.1, angle = 90, code = 3, lty = 1, col = "purple4", lwd = 2)
 arrows(x0 = 2, x1 = 2, 
-       y0 = adjustedci_Sound[1], y1 = adjustedci_Sound[2], 
+       y0 = adjustedciS[1], y1 = adjustedciS[2], 
        length = 0.1, angle = 90, code = 3, lty = 1, col = "purple4", lwd = 2)
 
 
