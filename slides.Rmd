@@ -7,7 +7,7 @@ date: '`r Sys.Date()`'
 institute: "Stockholm University"
 output:
   xaringan::moon_reader:
-    css: xaringan-themer.css
+    css: ['xaringan-themer.css', 'extra.css']
     self_contained: true
     seal: false
     nature:
@@ -30,8 +30,8 @@ knitr::opts_chunk$set(
   warning = FALSE,
   hiline = TRUE
 )
-#fig.width=20, fig.height=15, fig.retina=13
-# https://scontent-arn2-2.xx.fbcdn.net/v/t1.6435-9/49625893_10158449283896980_6346470992008708096_n.png?_nc_cat=108&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=viC67fSTHZEAX_YQVZk&_nc_ht=scontent-arn2-2.xx&oh=00_AT_tC-v9RCri9Ga_1-6khqI8owaASjBwNO-m4lwIWJgLyw&oe=61EE1A0E
+
+
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
@@ -49,6 +49,7 @@ library(xaringanExtra)
 
 ```
 
+
 class: center, middle
 background-image: url(https://www.amscins.com/wp-content/uploads/2011/05/Stockholm-university.jpg)
 background-size: 125px
@@ -56,7 +57,9 @@ background-position: 5% 92%
 
 # Individual assignment
 
-### Dataset 1
+## An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes
+
+#### Dataset 1
 
 Jon Ingi Hlynsson
 
@@ -66,7 +69,133 @@ Jon Ingi Hlynsson
 
 #### Date last edited: `r Sys.Date()`
 
+```{r setup and packages, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE) # this is included by default in markdown 
+
+## clean the environment -----
+rm(list = ls(all=T)) # remove all variables (all=T takes care of hidden objects)
+graphics.off() # turn off plots
+cat("\014") # clear the console ("\014" refers to the "L" key on the keyboard)
+## ----
+
+## an error message and the fix ------------------------------------------------
+## I sometimes get the error:
+
+# Error in gregexpr(calltext, singleline, fixed = TRUE) : 
+# regular expression is invalid UTF-8
+
+## the following code usually fixes it:
+# .rs.restartR() # this restarts the session
+
+## However I've also had to go into *file* and *reopen with Encoding* and choose 
+#  UTF-8
+# the following code can also does that
+# options(encoding = "UTF-8")
+
+# This extra information is added here as a comment to make readers aware of the
+# potential that this has happened on my end but likewise has a fix.
+## -----------------------------------------------------------------------------
+
+
+## import packages ----
+library(tidyverse) # for pipe friendly operations and ggplot
+library(ggpubr) # for convenient plotting 
+library(kableExtra) # for nice tables
+library(knitr) # for kable function and markdown output
+library(rstanarm) # for Bayesian models 
+## ---
+
+## Set working directory ----
+# Remember to set the working directory to the RELEVEANT position
+
+# read in data
+d_full <- read.table("https://raw.githubusercontent.com/JonHlynsson/PSMT59-Statistics-I/master/data/d1_soundscape.txt", 
+                     header = T, sep = ",")
+
+# create descriptive statistics table
+d_full_descriptives <- psych::describe(d_full) # create desc stats variable
+
+# give rows meaningful names
+row.names(d_full_descriptives) <- c("ID-number", 
+                                    "Soundscape type",
+                                    "BDS pretest",
+                                    "BDS posttest",
+                                    "DNB pretest",
+                                    "DNB posttest",
+                                    "Guessed purpose of experiment")
+
+# select relevant columns
+d_full_stats <- d_full_descriptives %>% 
+  select(n, mean, sd, median, min, max, se) 
+
+# give columns relevant names
+colnames(d_full_stats) <- c("N", "Mean", "Standard\n\ndeviation", "Median", "Min", 
+                            "Max", "Standard\n\nerror")
+```
+
+
 ---
 
-## The slides are under construction!
+
+# Slide 2 *Bakground* <sub>here will be a figure<sub>
+
+
+
+.center2[
+```{r, echo=F}
+# .pull-right[
+library(DiagrammeR)
+
+grViz("digraph flowchart {
+      # node definitions with substituted label text
+      node [fontname = Helvetica, shape = rectangle]        
+      tab1 [label = '@@1']
+      tab2 [label = '@@2']
+      tab3 [label = '@@3']
+      tab4 [label = '@@4']
+      tab5 [label = '@@5']
+      tab6 [label = '@@6']
+      tab7 [label = '@@7']
+      tab8 [label = '@@8']
+      tab9 [label = '@@9']
+
+      # edge definitions with the node IDs
+      tab1 -> tab2;
+      tab2 -> tab3;
+      tab2 -> tab4 -> tab5 -> tab6
+      tab6 -> tab7
+      tab6 -> tab8
+      tab7 -> tab9
+      tab8 -> tab9
+      }
+
+      [1]: 'Participants recruited from the University of Chicago campus and surrounding community'
+      [2]: 'Total number of participants n=65'
+      [3]: 'Participants non analyzable due to non-compliance n=2'
+      [4]: 'Participants analyzable for the study n=63'
+      [5]: 'Study sample n=63'
+      [6]: 'Participants compleated the dual n-back (DNB) task and back-ward digit span (BDS) task'
+      [7]: 'Participants heard natural sounds n=31'
+      [8]: 'Participants heard urban sounds n=32'
+      [9]: 'Participants retook the dual n-back (DNB) task and back-ward digit span (BDS) task'
+      ",
+      width = 700, 
+      # height = 700
+      )
+
+```
+]
+
+---
+
+
+
+```{r Print table, echo=F}
+d_full_stats %>%
+  kable(digits = 2,
+        align = "c") %>% kable_classic() %>% 
+  kable_styling(full_width = F, html_font = "Times") %>% 
+  footnote(general = "BDS refers to the back-ward digit span task and DNB refers to the dual n-back task.", footnote_as_chunk = T, fixed_small_size = T)
+```
+
 

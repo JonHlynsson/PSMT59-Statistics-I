@@ -4,12 +4,20 @@
     <title>Individual assignment</title>
     <meta charset="utf-8" />
     <meta name="author" content="Jon Ingi Hlynsson" />
-    <meta name="date" content="2022-01-01" />
+    <meta name="date" content="2022-01-03" />
     <script src="site_libs/header-attrs/header-attrs.js"></script>
+    <script src="site_libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="site_libs/viz/viz.js"></script>
+    <link href="site_libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
+    <script src="site_libs/grViz-binding/grViz.js"></script>
+    <script src="site_libs/kePrint/kePrint.js"></script>
+    <link href="site_libs/lightable/lightable.css" rel="stylesheet" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="extra.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
+
 
 
 
@@ -23,7 +31,9 @@ background-position: 5% 92%
 
 # Individual assignment
 
-### Dataset 1
+## An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes
+
+#### Dataset 1
 
 Jon Ingi Hlynsson
 
@@ -31,11 +41,120 @@ Jon Ingi Hlynsson
 
 #### Stockholm University 
 
-#### Date last edited: 2022-01-01
+#### Date last edited: 2022-01-03
+
+
+
 
 ---
 
-## The slides are under construction!
+
+# Slide 2 *Bakground* &lt;sub&gt;here will be a figure&lt;sub&gt;
+
+
+
+.center2[
+<div id="htmlwidget-0f6c3204c83e0308e832" style="width:700px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0f6c3204c83e0308e832">{"x":{"diagram":"digraph flowchart {\n      # node definitions with substituted label text\n      node [fontname = Helvetica, shape = rectangle]        \n      tab1 [label = \"Participants recruited from the University of Chicago campus and surrounding community\"]\n      tab2 [label = \"Total number of participants n=65\"]\n      tab3 [label = \"Participants non analyzable due to non-compliance n=2\"]\n      tab4 [label = \"Participants analyzable for the study n=63\"]\n      tab5 [label = \"Study sample n=63\"]\n      tab6 [label = \"Participants compleated the dual n-back (DNB) task and back-ward digit span (BDS) task\"]\n      tab7 [label = \"Participants heard natural sounds n=31\"]\n      tab8 [label = \"Participants heard urban sounds n=32\"]\n      tab9 [label = \"Participants retook the dual n-back (DNB) task and back-ward digit span (BDS) task\"]\n\n      # edge definitions with the node IDs\n      tab1 -> tab2;\n      tab2 -> tab3;\n      tab2 -> tab4 -> tab5 -> tab6\n      tab6 -> tab7\n      tab6 -> tab8\n      tab7 -> tab9\n      tab8 -> tab9\n      }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+
+
+&lt;table class=" lightable-classic table" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto; font-family: Times; width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;'&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; N &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Mean &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Standard
+
+deviation &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Median &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Min &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Max &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Standard
+
+error &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ID-number &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 32.59 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 19.04 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 32.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 65.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2.40 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Soundscape type &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.51 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.50 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.06 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; BDS pretest &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9.37 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2.47 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 3.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.31 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; BDS posttest &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 9.76 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2.56 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 10.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 4.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 14.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.32 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; DNB pretest &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.49 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.56 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.45 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; -0.38 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2.79 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; DNB posttest &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.67 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.56 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.68 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.22 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 2.95 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.07 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Guessed purpose of experiment &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 63 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.27 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.45 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 1.00 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; 0.06 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;&lt;tr&gt;&lt;td style="padding: 0; " colspan="100%"&gt;
+&lt;span style="font-style: italic;"&gt;Note: &lt;/span&gt; &lt;sup&gt;&lt;/sup&gt; BDS refers to the back-ward digit span task and DNB refers to the dual n-back task.&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
