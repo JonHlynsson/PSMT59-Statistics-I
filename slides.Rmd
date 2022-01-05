@@ -137,7 +137,7 @@ colnames(d_full_stats) <- c("N", "Mean", "Standard\n\ndeviation", "Median", "Min
 ---
 
 
-# Slide 2 *Bakground* <sub>here will be a figure<sub>
+# *Bakground* 
 
 
 
@@ -157,45 +157,494 @@ grViz("digraph flowchart {
       tab6 [label = '@@6']
       tab7 [label = '@@7']
       tab8 [label = '@@8']
-      tab9 [label = '@@9']
 
       # edge definitions with the node IDs
-      tab1 -> tab2;
-      tab2 -> tab3;
-      tab2 -> tab4 -> tab5 -> tab6
+      tab1 -> tab2
+      tab2 -> tab3
+      tab2 -> tab4
+      tab3 -> tab5
+      tab4 -> tab5
+      tab5 -> tab6
       tab6 -> tab7
       tab6 -> tab8
-      tab7 -> tab9
-      tab8 -> tab9
       }
 
-      [1]: 'Participants recruited from the University of Chicago campus and surrounding community'
-      [2]: 'Total number of participants n=65'
-      [3]: 'Participants non analyzable due to non-compliance n=2'
-      [4]: 'Participants analyzable for the study n=63'
-      [5]: 'Study sample n=63'
-      [6]: 'Participants compleated the dual n-back (DNB) task and back-ward digit span (BDS) task'
-      [7]: 'Participants heard natural sounds n=31'
-      [8]: 'Participants heard urban sounds n=32'
-      [9]: 'Participants retook the dual n-back (DNB) task and back-ward digit span (BDS) task'
+      [1]: 'Study sample n=63'
+      [2]: 'Participants compleated the dual n-back task (DNB) and back-ward digit span task (BDS)'
+      [3]: 'Participants heard natural sounds n=31'
+      [4]: 'Participants heard urban sounds n=32'
+      [5]: 'Participants retook the dual n-back task (DNB) and back-ward digit span task (BDS)'
+      [6]: 'Participants gave information on whether they guessed the purpose of the experiment'
+      [7]: '17 participants guessed the purpose of the experiment'
+      [8]: '46 participants did not guess the purpose of the experiment'
       ",
-      width = 700, 
+      width = 1000, 
       # height = 700
       )
 
 ```
 ]
 
+
+???
+
+Data given to me by Mats Nilsson, also available on the OS framework
+
 ---
 
 
+# Descriptive statistics for the sample
 
+**Table 1. Descriptive statistics**
 ```{r Print table, echo=F}
 d_full_stats %>%
   kable(digits = 2,
         align = "c") %>% kable_classic() %>% 
-  kable_styling(full_width = F, html_font = "Times") %>% 
-  footnote(general = "BDS refers to the back-ward digit span task and DNB refers to the dual n-back task.", footnote_as_chunk = T, fixed_small_size = T)
+  kable_styling(full_width = T, html_font = "Times") %>% 
+  footnote(general = "BDS refers to the back-ward digit span task and DNB refers to the dual n-back task.\n\n", 
+           footnote_as_chunk = T, fixed_small_size = T) %>% 
+  add_footnote(c("BDS and DNB are assumed to be on an interval scale."), 
+               notation = "alphabet")
 ```
 
 
+---
+
+
+```{r Create a new data set with all participants, echo=F, results='hide'}
+## Regarding the construction of a new dataset from d_full ---- 
+
+# The data is applicable to a data-analysis. First a new dataset needs to be 
+# constructed with the aim of binding together the cognitive measures 
+# back-ward digit span task (DBS) and `dual n-back task (DNB)`. 
+# Thereafter, the `dnb` and `bds` variables need to be z-scored to make the two 
+# attentional cognitive measures comparable. Finally, the z-scored variables 
+# dnb and bds can be combined.
+
+## ----
+
+## Predata selection ----
+d_full_pre <- d_full[, c(1, 2, 3, 5, 7)] # select pretest data
+d_full_pre$testing <- rep(0, nrow(d_full_pre)) # add dummy variable to indicate 
+names(d_full_pre) <- c("id", 
+                       "soundscape_type", 
+                       "bds", 
+                       "dnb",
+                       "guessed_purpose", 
+                       "testing") # rename variables because I already have an
+#                                   indication variable
+head(d_full_pre) # sanity check 
+str(d_full_pre) # sanity check 
+## ----
+
+
+## Postdata selection ----
+d_full_post <- d_full[, c(1, 2, 4, 6, 7)] # select postdata
+d_full_post$testing <- rep(1, nrow(d_full_post)) # add dummy var to indicate
+names(d_full_post) <- c("id", 
+                        "soundscape_type", 
+                        "bds", 
+                        "dnb", 
+                        "guessed_purpose", 
+                        "testing") # rename variables because I already have an
+#                                    indication variable
+head(d_full_post) # sanity check
+str(d_full_post) # sanity check
+## ----
+
+
+## Create a new combined dataset with r-bind ----
+d <- rbind(d_full_pre, d_full_post)
+head(d) # sanity check
+summary(d) # sanity check
+str(d) # sanity check
+## ----
+
+## remove pre and post data placeholder datasets to clear memory  ----
+rm(d_full_pre)
+rm(d_full_post)
+## ----
+
+
+## Make id, soundscape_type, guessed_purpose, and post as factors ----
+d$id <- factor(d$id)
+d$soundscape_type <- factor(d$soundscape_type, labels = c("Natural", "Urban"))
+d$guessed_purpose <- factor(d$guessed_purpose, labels = c("No", "Yes"))
+d$testing <- factor(d$testing, labels = c("Pretest", "Posttest"))
+
+head(d) # sanity check
+str(d) # sanity check
+summary(d) # sanity check 
+## ----
+
+
+## Create z-score function ----
+z_score <- function(x){
+  out <- (x - mean(x, na.rm = TRUE))/sd(x, na.rm = TRUE)
+  out
+}
+## ----
+
+
+## z-score the difference score ----
+d$zDNB <- z_score(d$dnb)
+d$zBDS <- z_score(d$bds)
+head(d) # sanity check
+## ----
+
+
+## combine z-variables ----
+d$CogTest <- (d$zDNB + d$zBDS)/2
+head(d) # sanity check
+str(d) # sanity check
+summary(d) # sanity check
+## First I need to define a new dataset with only the naïve participants ----
+
+## new dataset with only naïve ----
+
+# First select all cases where guessed purpose = No from dataset d
+# but exclude the variables made for full set 
+
+# First create new datase n_d from d where guessed purpose = No
+# then select relevant variables with the select function from tidyverse
+n_d <- d[d$guessed_purpose=="No", ] %>% 
+  select(id, guessed_purpose, bds, dnb, testing, soundscape_type) 
+
+head(n_d) # sanity check
+
+# now create a new z-score for bds and dnb ----
+n_d$zDNB_naive <- z_score(n_d$dnb) 
+n_d$zBDS_naive <- z_score(n_d$bds)
+head(n_d) # sanity check
+
+## combine z-variables ----
+n_d$CogTest <- (n_d$zDNB + n_d$zBDS)/2
+head(n_d) # sanity check
+
+## Draw figures ----
+# create position dodge (pd) to avoid plot overlay, i.e., avoid overplotting
+pd <- position_dodge(0.3) 
+
+# plot for full dataset created
+plot_full <- ggline(d, x = "testing", y = "CogTest", color = "soundscape_type",
+               add = c("mean_se"),
+               palette = c("#058d18", "#cf5474"),
+               ggtheme = theme_xaringan(title_font_size = 18, text_font_size = 14),
+               main = "All participants",
+               xlab = "Time",
+               ylab = "Compostite score (z)",
+               ylim = range(-0.4, 0.6),
+               legend.title = "Soundscape type",
+               font.main = c("italic"),
+               position = pd, 
+               shape = "soundscape_type") 
+
+# plot for naive participants created
+plot_naive <- ggline(n_d, x = "testing", y = "CogTest", color = "soundscape_type",
+               add = c("mean_se"),
+               palette = c("#058d18", "#cf5474"),
+               ggtheme = theme_xaringan(title_font_size = 18, text_font_size = 14),
+               main = "Naïve participants", 
+               xlab = "Time",
+               ylab = "Compostite score (z)",
+               ylim = range(-0.4, 0.6),
+               legend.title = "Soundscape type",
+               font.main = c("italic"),
+               position = pd,
+               shape = "soundscape_type")
+
+## arrange figures together in a new variable to print in the file ----
+figure1 <- ggarrange(plot_full, plot_naive, common.legend = TRUE, 
+                    legend = "top", nrow = 1, widths = c(3, 3))
+
+```
+
+# Effect plots 
+
+.left-column[
+This plot replicates the result of Van Hedger et al. (2019).
+]
+
+.right-column[
+```{r, echo=FALSE, fig.width=9, fig.height=6, fig.retina=3, dpi = 150, out.width = "80%"}
+figure1
+```
+]
+
+
+---
+
+
+# Baysian regression plots
+
+
+```{r Using difference scores to better interperate the results, results='hide', echo=F}
+
+# replicate d_full ----
+d2 <- d_full
+
+# create difference scores ----
+d2$bds_diff <- (d2$bds_post - d2$bds_pre) 
+d2$dnb_diff <- (d2$dnb_post - d2$dnb_pre)
+
+# Z-scoring ----
+# z score the difference scores separately to be able to add the two attentional 
+# tasks together
+
+d2$bds_diff_Z <- z_score(d2$bds_diff)
+d2$dnb_diff_Z <- z_score(d2$dnb_diff)
+
+
+round(mean(d2$dnb_diff_Z), 5) # sanity check - we want the value 0
+round(mean(d2$bds_diff_Z), 5) # sanity check - we want the value 0
+
+sd(d2$bds_diff_Z) # sanity check - should give the value 1
+sd(d2$dnb_diff_Z) # sanity check - should give the value 1
+
+
+# create composite variable from the difference scores ----
+d2$CogTest <- (d2$bds_diff_Z + d2$dnb_diff_Z)/2
+
+# make soundscape a factor and let Urban be the reference group ----
+d2$soundscape_type <- factor(d2$soundscape_type, levels = c("U", "N"))
+
+# do a crude linear model ----
+crude <- stan_glm(CogTest ~ soundscape_type, 
+                  data = d2, 
+                  refresh = F, 
+                  seed = 1995)
+summary(crude) # model inspection
+round(coef(crude), 2) # model inspection
+round(posterior_interval(crude, prob = .89), 2) # model inspection
+
+# repeat info from code book for convenience to reader of this code ----
+# guessed_purpose = Whether the participant guessed (1) or not (0) the 
+#------------------ purpose of the experiment
+
+# make guessed purpose a factor ----
+d2$guessed_purpose <- factor(d2$guessed_purpose, 
+                             levels = c("1", "0"),
+                             labels = c("Not-naïve", "Naïve"))  
+
+# do an adjusted model
+adjusted <- stan_glm(CogTest ~ soundscape_type + guessed_purpose, 
+                     data = d2, 
+                     refresh = F, 
+                     seed = 1995)
+
+summary(adjusted) # model inspection
+round(coef(crude), 2)  # CRUDE model inspection
+round(posterior_interval(crude, prob = .89), 2) # CRUDE model inspection
+round(coef(adjusted), 2)  # ADJUSTED model inspection
+round(posterior_interval(adjusted, prob = .89), 2) # ADJUSTED model inspection
+
+
+## Data table preparation ----
+# create variable that holds all info about both models ----
+Models <- rbind(crude=round(posterior_interval(crude, prob = .89), 2), 
+                adjusted=round(posterior_interval(adjusted, prob = .89), 2))
+
+# give rows meaningful names ----
+row.names(Models) <- c("Intercept", "Soundscape Natural", "Sigma", 
+                       "Intercept", "Soundscape Natural", "Naïve", "Sigma")
+
+
+Models[c(1,2,4,5,6), ] # sanity check to see how output looks like without sigma
+
+```
+
+
+.pull-left[
+```{r, echo=F}
+# print the table variable created above with kable and kable extra
+Models[c(1,2,4,5,6), ] %>% 
+  kable(caption = "89% Compatability intervals for crude and adjusted models") %>% 
+  kable_classic(html_font = "Times") %>% 
+  kable_styling(full_width = F, position = "float_left") %>% 
+  ## kableExtra:: is used to avoid conflict of packages 
+  kableExtra::group_rows(group_label = "Crude model", start_row = 1, 
+                         end_row = 2) %>% 
+  kableExtra::group_rows(group_label = "Adjusted model", start_row = 3, 
+                         end_row = 5)
+```
+]
+
+
+```{r, fig.cap="Visualization of Regression Lines From the Posterior Distribution", include=T, message=F, fig.align='right', echo=F, results='hide'}
+## Plots -----
+library(rethinking) # load rethinking package for coloring lines easily  
+
+# Before the plots can be drawn I need to reparametrize the models so I have no
+# intercept
+
+## First reparametrize the crude and adjusted models ----
+
+# First the reparametrize the CRUDE model ----
+# I add a 0 to get no intercept
+crudeRe <- stan_glm(CogTest ~ 0 + soundscape_type,
+                  data = d2, 
+                  refresh = F, 
+                  seed = 1995)
+
+summary(crudeRe) # model inspection
+posterior_interval(crudeRe) # model inspection
+
+# Then the reparametrize the ADJUSTED model ----
+# I add a 0 to get no intercept
+adjustedRe <- stan_glm(CogTest ~ 0 + soundscape_type + guessed_purpose,
+                  data = d2, 
+                  refresh = F, 
+                  seed = 1995)
+
+summary(adjustedRe) # model inspection
+posterior_interval(adjustedRe) # model inspection
+
+
+## Now plots can be drawn ----
+par(mfrow = c(1, 2), font = 1) # 1 column, 2 rows for the figure to be plotted
+
+
+# create jitter ----
+# jitter - random noisy variable with mean = 0 and sd = 0.05 that is added to 
+# -------- the predictor to facilitate data point identification
+jitter <- rnorm(length(as.numeric(d2$soundscape_type)), mean = 0, sd = 0.05)
+
+
+## Plot the crude model ----
+# NOTE: soundscape as numeric (1 = Urban, 2 = Natural)
+plot(as.numeric(d2$soundscape_type) + jitter, 
+     d2$CogTest, 
+     pch = 21, 
+     bg = "white", 
+     axes = F, 
+     xlab = "Soundscape type", 
+     ylab = "Composite score", 
+     ylim = c(-2, 2))
+
+# add regression lines
+cf0 <- crude$coefficients # extract coefficients
+# draw regression line with lines function
+lines(x = c(1, 2), y = c(cf0[1], cf0[1]+cf0[2]), lwd = 2, col = "black")
+
+## add CI to figure 
+
+# First extract posterior interval for Urban 
+crudeciU <- posterior_interval(crudeRe)[1, ] 
+# Then extract posterior interval for Natual  
+crudeciS <- posterior_interval(crudeRe)[2, ] 
+
+# draw CI bands
+arrows(x0 = 1, x1 = 1, 
+       y0 = crudeciU[1], y1 = crudeciU[2], 
+       length = 0.1, angle = 90, code = 3, lty = 1, col = "black", lwd = 2)
+arrows(x0 = 2, x1 = 2, 
+       y0 = crudeciS[1], y1 = crudeciS[2], 
+       length = 0.1, angle = 90, code = 3, lty = 1, col = "black", lwd = 2)
+
+
+# add points
+points(c(1, 2), 
+       c(mean(d2$CogTest[d2$soundscape_type == "U"]), 
+         mean(d2$CogTest[d2$soundscape_type == "N"])),
+       pch = 21, bg = "skyblue", cex = 1.5, col = "purple4")
+# Add x-axis labels
+axis(1, at = c(1, 2), labels = c('Urban', 'Natural'))
+# add y-axis
+axis(2, at = c(-2:2), tick = T)
+
+## Extract samples from crude model 
+# Coercing a model to a data-frame returns a data-frame of posterior samples 
+# One row per sample.
+fits <- crude %>% # for the crude model
+  as_tibble() %>% 
+  rename(intercept = `(Intercept)`) %>% 
+  select(-sigma)
+
+## add regression estimates
+for ( i in 1:20 ) {
+  curve(fits$intercept[i] + 
+          fits$soundscape_typeN[i]*(x-mean(as.numeric(d2$soundscape_type))),
+         col=col.alpha("black", 0.2) , add=TRUE ,from = 1, to = 2)}
+
+# add label to plot
+mtext(text = "Crude model", side = 3)
+
+# Add legend
+points(0.92, 1.8, pch = 21, bg = "skyblue", cex = 1)
+text(x = 0.9, y = 1.8, labels = "The arithmetic mean value", 
+     pos = 4, cex = 0.55)
+
+## Draw the adjusted model ----
+# NOTE: soundscape as numeric (1 = Urban, 2 = Natural)
+plot(as.numeric(d2$soundscape_type) + jitter, 
+     d2$CogTest, 
+     pch = 21, 
+     bg = "white", 
+     axes = F, 
+     xlab = "Soundscape type", 
+     ylab = "Composite score", 
+     ylim = c(-2, 2))
+
+# add regression line
+cf1 <- adjusted$coefficients # extract coefficients 
+lines(x = c(1, 2), y = c(cf1[1], cf1[1]+cf1[2]+cf1[3]), 
+      lwd = 2, col = "black") # draw the regression line with the lines function
+
+## add CI to figures
+
+# extract posterior interval for Urban 
+adjustedciU <- posterior_interval(adjustedRe)[1, ] 
+
+# extract posterior interval for Natural 
+adjustedciS <- posterior_interval(adjustedRe)[2, ]
+
+# draw CI bands
+arrows(x0 = 1, x1 = 1, 
+       y0 = adjustedciU[1], y1 = adjustedciU[2], 
+       length = 0.1, angle = 90, code = 3, lty = 1, col = "black", lwd = 2)
+arrows(x0 = 2, x1 = 2, 
+       y0 = adjustedciS[1], y1 = adjustedciS[2], 
+       length = 0.1, angle = 90, code = 3, lty = 1, col = "black", lwd = 2)
+
+
+# add points
+points(c(1, 2), 
+       c(mean(d2$CogTest[d2$soundscape_type == "U"]), 
+         mean(d2$CogTest[d2$soundscape_type == "N"])),
+       pch = 21, bg = "skyblue", cex = 1.5, col = "purple4")
+
+# Add x-axis labels
+axis(1, at = c(1, 2), labels = c('Urban', 'Natural'))
+# add y-axis
+axis(2, at = c(-2:2), tick = T)
+
+## Extract samples from adjusted model 
+# Coercing a model to a data-frame returns a data-frame of posterior samples 
+# One row per sample.
+fits2 <- adjusted %>% 
+  as_tibble() %>% 
+  rename(intercept = `(Intercept)`) %>% 
+  select(-sigma)
+
+## add regression estimates
+for ( i in 1:20 ) {
+  curve(fits2$intercept[i] + 
+          fits2$soundscape_typeN[i]*(x-mean(as.numeric(d2$soundscape_type))),
+         col=col.alpha("black", 0.2) , add=TRUE ,from = 1, to = 2)}
+
+# add label
+mtext(text = "Adjusted model", side = 3)
+
+# Add legend
+points(0.92, 1.8, pch = 21, bg = "skyblue", cex = 1)
+text(x = 0.9, y = 1.8, labels = "The arithmetic mean value", 
+     pos = 4, cex = 0.55)
+```
+
+
+
+---
+class: inverse, center, middle
+
+
+# An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes

@@ -9,8 +9,6 @@ output:
 
 ![](images/Banner.jpg)
 
-**The slides are under construction.**
-
 
 ```{r, echo=F}
 library(xaringanExtra)

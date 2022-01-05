@@ -11,7 +11,7 @@
 
 <meta name="author" content="Jon Ingi Hlynsson" />
 
-<meta name="date" content="2022-01-03" />
+<meta name="date" content="2022-01-05" />
 
 <title>Individual assignment</title>
 
@@ -32,7 +32,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation/tabsets.js"></script>
-<script src="site_libs/navigation/codefolding.js"></script>
 <link href="site_libs/highlightjs/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs/highlight.js"></script>
 <script src="site_libs/kePrint/kePrint.js"></script>
@@ -223,9 +222,6 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
 
 
 
@@ -315,19 +311,11 @@ $(document).ready(function () {
 
 <div id="header">
 
-<div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 <h1 class="title toc-ignore">Individual assignment</h1>
 <h4 class="author">Jon Ingi Hlynsson</h4>
-<h4 class="date">2022-01-03</h4>
+<h4 class="date">2022-01-05</h4>
 
 </div>
 
@@ -527,9 +515,46 @@ Natural
 </table>
 </div>
 <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> Supplimentary table 2 shows the means and dispersion of the crude and adjusted models.</p>
+<p><br><br><br></p>
+<pre class="r"><code># Additional analysis to replicate the ANOVA results from the paper
+# Full dataset
+aov1 &lt;- aov(CogTest ~ testing * soundscape_type + Error(id/CogTest), data = d)
+summary(aov1)</code></pre>
+<pre><code>## 
+## Error: id
+##                 Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## soundscape_type  1   3.59   3.592   3.081 0.0843 .
+## Residuals       61  71.12   1.166                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: CogTest:id
+##                         Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## testing                  1  1.731  1.7315  12.595 0.000751 ***
+## testing:soundscape_type  1  1.088  1.0884   7.917 0.006581 ** 
+## Residuals               61  8.386  0.1375                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre class="r"><code># Additional analysis to replicate the ANOVA results from the paper
+# Naive dataset
+aov2 &lt;- aov(CogTest ~ testing * soundscape_type + Error(id/CogTest), data = n_d)
+summary(aov2)</code></pre>
+<pre><code>## 
+## Error: id
+##                 Df Sum Sq Mean Sq F value Pr(&gt;F)
+## soundscape_type  1   2.43   2.429   1.939  0.171
+## Residuals       44  55.11   1.252               
+## 
+## Error: CogTest:id
+##                         Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## testing                  1  0.855  0.8550   7.227 0.0101 *
+## testing:soundscape_type  1  0.779  0.7788   6.583 0.0138 *
+## Residuals               44  5.206  0.1183                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <br><br><br><br><br><br><br><br>
 <hr>
-<p>&#169; Jon Ingi Hlynsson - last edited 2022-01-03</p>
+<p>&#169; Jon Ingi Hlynsson - last edited 2022-01-05</p>
 
 
 
@@ -564,11 +589,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

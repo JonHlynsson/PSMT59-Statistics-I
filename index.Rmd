@@ -35,6 +35,7 @@ This page includes all relevant links for a replication analysis with data from 
 
 Special thanks to [Mats Nilsson](https://www.su.se/profiles/matni-1.184039), the course leader in [**PSMT59: Statistics I**](https://www.su.se/english/search-courses-and-programmes/psmt59-1.487437). 
 
+**NOTE**: In the instructions, it says to *only* do a results section. Thus, a general conclusion was not included in this paper.
 
 <br><br><br><br><br><br><br><br>
 

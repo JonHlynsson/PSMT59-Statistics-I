@@ -8,7 +8,7 @@ output:
     toc_depth: 3
     toc: yes
     toc_float: no
-    code_folding: hide
+    # code_folding: hide
     fig_caption: yes
     theme: flatly
     highlight: textmate
@@ -20,11 +20,11 @@ citation-style: apa-annotated-bibliography.csl
 ```{r setup and packages, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE) # this is included by default in markdown 
 
-## clean the environment -----
+## clean the environment -------------------------------------------------------
 rm(list = ls(all=T)) # remove all variables (all=T takes care of hidden objects)
 graphics.off() # turn off plots
 cat("\014") # clear the console ("\014" refers to the "L" key on the keyboard)
-## ----
+## -----------------------------------------------------------------------------
 
 ## an error message and the fix ------------------------------------------------
 ## I sometimes get the error:
@@ -170,8 +170,8 @@ dstat %>% select(c("condition", "outcome", "sd_out")) %>%
         col.names = c("Type of soundscape", "Mean", "sd")) %>% 
   kable_classic() %>% 
   kable_styling(full_width = T, html_font = "Times") %>% 
-  group_rows(group_label = "Pretest", start_row = 1, end_row = 2) %>% 
-  group_rows(group_label = "Posttest", start_row = 3, end_row = 4)
+  kableExtra::group_rows(group_label = "Pretest", start_row = 1, end_row = 2) %>% 
+  kableExtra::group_rows(group_label = "Posttest", start_row = 3, end_row = 4)
 
 ## interpretation --------------------------------------------------------------
 ```
@@ -279,10 +279,10 @@ a <- d2statAdjusted %>% select(c("Type of soundscape", "Mean", "sd")) %>%
   kable(digits = 2, col.names = c("**Adjusted descriptives**", "", "")) %>% 
   kable_classic() %>% 
   kable_styling(full_width = T, html_font = "Times") %>% 
-  group_rows(group_label = "Naïve participants", start_row = 1, end_row = 2, 
-             indent = F, bold = F, italic = T) %>% 
-  group_rows(group_label = "Non-naïve participants", start_row = 3, end_row = 4, 
-             indent = F, bold = F, italic = T)
+  kableExtra::group_rows(group_label = "Naïve participants", start_row = 1, 
+                         end_row = 2, indent = F, bold = F, italic = T) %>% 
+  kableExtra::group_rows(group_label = "Non-naïve participants", start_row = 3, 
+                         end_row = 4, indent = F, bold = F, italic = T)
 ```
 
 
@@ -298,6 +298,51 @@ a
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 Supplimentary table 2 shows the means and dispersion of the crude and adjusted models.
+
+<br><br><br>
+```{r, echo=F, results='hide'}
+## new dataset with only naïve ----
+
+# First select all cases where guessed purpose = No from dataset d
+# but exclude the variables made for full set 
+
+# First create new datase n_d from d where guessed purpose = No
+# then select relevant variables with the select function from tidyverse
+n_d <- d[d$guessed_purpose=="No", ] %>% 
+  select(id, guessed_purpose, bds, dnb, testing, soundscape_type) 
+
+head(n_d) # sanity check
+
+# now create a new z-score for bds and dnb ----
+n_d$zDNB_naive <- z_score(n_d$dnb) 
+n_d$zBDS_naive <- z_score(n_d$bds)
+head(n_d) # sanity check
+
+## combine z-variables ----
+n_d$CogTest <- (n_d$zDNB + n_d$zBDS)/2
+head(n_d) # sanity check
+```
+
+
+```{r Additional anlysis to replicate the ANOVA results from the paper}
+# Additional analysis to replicate the ANOVA results from the paper
+# Full dataset
+aov1 <- aov(CogTest ~ testing * soundscape_type + Error(id/CogTest), data = d)
+summary(aov1)
+
+# Additional analysis to replicate the ANOVA results from the paper
+# Naive dataset
+aov2 <- aov(CogTest ~ testing * soundscape_type + Error(id/CogTest), data = n_d)
+summary(aov2)
+```
+
+
+```{r Additional Baysian anlysis to replicate the ANOVA results from the paper, echo=FALSE}
+## the following code does a Bayesian linear model that corresponds to the ANOVA
+# stan_glmer(CogTest ~ testing * soundscape_type + (testing|id), 
+#            data = d, refresh =F)
+```
+
 
 <br><br><br><br><br><br><br><br><hr>
 `r r2symbols::symbol("copyright")` Jon Ingi Hlynsson - last edited `r Sys.Date()`

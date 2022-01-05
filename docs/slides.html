@@ -4,7 +4,7 @@
     <title>Individual assignment</title>
     <meta charset="utf-8" />
     <meta name="author" content="Jon Ingi Hlynsson" />
-    <meta name="date" content="2022-01-03" />
+    <meta name="date" content="2022-01-05" />
     <script src="site_libs/header-attrs/header-attrs.js"></script>
     <script src="site_libs/htmlwidgets/htmlwidgets.js"></script>
     <script src="site_libs/viz/viz.js"></script>
@@ -41,7 +41,7 @@ Jon Ingi Hlynsson
 
 #### Stockholm University 
 
-#### Date last edited: 2022-01-03
+#### Date last edited: 2022-01-05
 
 
 
@@ -49,20 +49,27 @@ Jon Ingi Hlynsson
 ---
 
 
-# Slide 2 *Bakground* &lt;sub&gt;here will be a figure&lt;sub&gt;
+# *Bakground* 
 
 
 
 .center2[
-<div id="htmlwidget-159538a13d753cb7a910" style="width:700px;height:504px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-159538a13d753cb7a910">{"x":{"diagram":"digraph flowchart {\n      # node definitions with substituted label text\n      node [fontname = Helvetica, shape = rectangle]        \n      tab1 [label = \"Participants recruited from the University of Chicago campus and surrounding community\"]\n      tab2 [label = \"Total number of participants n=65\"]\n      tab3 [label = \"Participants non analyzable due to non-compliance n=2\"]\n      tab4 [label = \"Participants analyzable for the study n=63\"]\n      tab5 [label = \"Study sample n=63\"]\n      tab6 [label = \"Participants compleated the dual n-back (DNB) task and back-ward digit span (BDS) task\"]\n      tab7 [label = \"Participants heard natural sounds n=31\"]\n      tab8 [label = \"Participants heard urban sounds n=32\"]\n      tab9 [label = \"Participants retook the dual n-back (DNB) task and back-ward digit span (BDS) task\"]\n\n      # edge definitions with the node IDs\n      tab1 -> tab2;\n      tab2 -> tab3;\n      tab2 -> tab4 -> tab5 -> tab6\n      tab6 -> tab7\n      tab6 -> tab8\n      tab7 -> tab9\n      tab8 -> tab9\n      }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ecb32384ba6d50a0e23c" style="width:1000px;height:504px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ecb32384ba6d50a0e23c">{"x":{"diagram":"digraph flowchart {\n      # node definitions with substituted label text\n      node [fontname = Helvetica, shape = rectangle]        \n      tab1 [label = \"Study sample n=63\"]\n      tab2 [label = \"Participants compleated the dual n-back task (DNB) and back-ward digit span task (BDS)\"]\n      tab3 [label = \"Participants heard natural sounds n=31\"]\n      tab4 [label = \"Participants heard urban sounds n=32\"]\n      tab5 [label = \"Participants retook the dual n-back task (DNB) and back-ward digit span task (BDS)\"]\n      tab6 [label = \"Participants gave information on whether they guessed the purpose of the experiment\"]\n      tab7 [label = \"17 participants guessed the purpose of the experiment\"]\n      tab8 [label = \"46 participants did not guess the purpose of the experiment\"]\n\n      # edge definitions with the node IDs\n      tab1 -> tab2\n      tab2 -> tab3\n      tab2 -> tab4\n      tab3 -> tab5\n      tab4 -> tab5\n      tab5 -> tab6\n      tab6 -> tab7\n      tab6 -> tab8\n      }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 ]
+
+
+???
+
+Data given to me by Mats Nilsson, also available on the OS framework
 
 ---
 
 
+# Descriptive statistics for the sample
 
-&lt;table class=" lightable-classic table" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto; font-family: Times; width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;'&gt;
+**Table 1. Descriptive statistics**
+&lt;table class=" lightable-classic table" style='font-family: "Arial Narrow", "Source Sans Pro", sans-serif; margin-left: auto; margin-right: auto; font-family: Times; margin-left: auto; margin-right: auto;border-bottom: 0;'&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
@@ -151,11 +158,97 @@ error &lt;/th&gt;
    &lt;td style="text-align:center;"&gt; 0.06 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
+&lt;tfoot&gt;
+&lt;tr&gt;
+&lt;td style = 'padding: 0; border:0;' colspan='100%'&gt;&lt;sup&gt;a&lt;/sup&gt; BDS and DNB are assumed to be on an interval scale.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tfoot&gt;
 &lt;tfoot&gt;&lt;tr&gt;&lt;td style="padding: 0; " colspan="100%"&gt;
-&lt;span style="font-style: italic;"&gt;Note: &lt;/span&gt; &lt;sup&gt;&lt;/sup&gt; BDS refers to the back-ward digit span task and DNB refers to the dual n-back task.&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;span style="font-style: italic;"&gt;Note: &lt;/span&gt; &lt;sup&gt;&lt;/sup&gt; BDS refers to the back-ward digit span task and DNB refers to the dual n-back task.&lt;br&gt;&lt;br&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
 &lt;/table&gt;
 
 
+---
+
+
+
+
+# Effect plots 
+
+.left-column[
+This plot replicates the result of Van Hedger et al. (2019).
+]
+
+.right-column[
+&lt;img src="slides_files/figure-html/unnamed-chunk-2-1.png" width="80%" /&gt;
+]
+
+
+---
+
+
+# Baysian regression plots
+
+
+
+
+
+.pull-left[
+&lt;table class=" lightable-classic table" style="font-family: Times; margin-left: auto; margin-right: auto; width: auto !important; float: left; margin-right: 10px;"&gt;
+&lt;caption&gt;89% Compatability intervals for crude and adjusted models&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 5.5% &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 94.5% &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr grouplength="2"&gt;&lt;td colspan="3" style="border-bottom: 0;"&gt;&lt;strong&gt;Crude model&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+   &lt;td style="text-align:left;padding-left: 2em;" indentlevel="1"&gt; Intercept &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.43 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.03 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;padding-left: 2em;" indentlevel="1"&gt; Soundscape Natural &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr grouplength="3"&gt;&lt;td colspan="3" style="border-bottom: 0;"&gt;&lt;strong&gt;Adjusted model&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+   &lt;td style="text-align:left;padding-left: 2em;" indentlevel="1"&gt; Intercept &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.45 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.17 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;padding-left: 2em;" indentlevel="1"&gt; Soundscape Natural &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.74 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;padding-left: 2em;" indentlevel="1"&gt; Naïve &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.42 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.18 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+
+&lt;div class="figure" style="text-align: right"&gt;
+&lt;img src="slides_files/figure-html/unnamed-chunk-4-1.png" alt="Visualization of Regression Lines From the Posterior Distribution"  /&gt;
+&lt;p class="caption"&gt;Visualization of Regression Lines From the Posterior Distribution&lt;/p&gt;
+&lt;/div&gt;
+
+
+
+---
+class: inverse, center, middle
+
+
+# An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
