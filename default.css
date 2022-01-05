@@ -9,6 +9,8 @@
 
 html {
   font-size: var(--base-font-size);
+  scroll-behavior: smooth; /* Set the scroll behavior to smooth */
+}
 }
 
 body {
