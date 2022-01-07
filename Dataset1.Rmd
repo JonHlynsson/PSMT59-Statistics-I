@@ -610,7 +610,7 @@ text(x = 0.9, y = 1.8, labels = "The arithmetic mean value",
 
 ```
 
-As figure 1.2 shows, more uncertainty is in the *adjusted model* in comparison to the *crude model*. This result is somewhat surprising, given that naïvety was statistically controlled instead of omitting participants.
+As figure 1.2 shows, more uncertainty is in the *adjusted model* in comparison to the *crude model*. This result is somewhat surprising, given that naïvety was statistically controlled instead of omitting participants. However, this result can be explained by the fact that if participants **know** the purpose of the experiment, they are more likely to behave in a homogeneous manner. Thus, when we control for naïvety, participant response is more spread out. 
 
 <br><br>
 
