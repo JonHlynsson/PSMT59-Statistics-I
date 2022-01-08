@@ -637,7 +637,7 @@ WC # Character count is 4328 and thus NOT < 4000, BUT I referenced all packages
 # However, this function counts captions. 
 
 # When the characters excluding tables and captions is counted, the character
-# count, WITH SPACES is 3215. (as stated in the instructions)
+# count, WITH SPACES is 3452. (as stated in the instructions)
 
 ## Thus the characther count is well under 4000 and there should not be a 
 #  point deduction on the grounds of extending the 3k maximum since Mats had

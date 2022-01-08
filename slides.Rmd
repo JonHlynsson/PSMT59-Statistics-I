@@ -137,49 +137,50 @@ colnames(d_full_stats) <- c("N", "Mean", "Standard\n\ndeviation", "Median", "Min
 ---
 
 
-# *Bakground* 
+# *Study Design*
 
 
 
 .center2[
-```{r, echo=F}
+```{r, echo=F, out.width="150%"}
 # .pull-right[
 library(DiagrammeR)
 
 grViz("digraph flowchart {
+      graph[ rankdir=LR]
       # node definitions with substituted label text
-      node [fontname = Helvetica, shape = rectangle]        
-      tab1 [label = '@@1']
-      tab2 [label = '@@2']
-      tab3 [label = '@@3']
-      tab4 [label = '@@4']
-      tab5 [label = '@@5']
-      tab6 [label = '@@6']
-      tab7 [label = '@@7']
-      tab8 [label = '@@8']
+      node [fontname = Helvetica, shape = rectangle, color = '#1381B0', style = 'filled']        
+      tab1 [label = '@@1', fontcolor = '#f0f0f0', style='rounded, filled']
+      tab2 [label = '@@2', fontcolor = '#f0f0f0', style='rounded, filled']
+      tab3 [label = '@@3', fontcolor = '#f0f0f0', style='rounded, filled']
+      tab4 [label = '@@4', fontcolor = '#f0f0f0', style='rounded, filled']
+      tab5 [label = '@@5', fontcolor = '#f0f0f0', style='rounded, filled']
+      tab6 [label = '@@6', fontcolor = '#f0f0f0', style='rounded, filled']
+      tab7 [label = '@@7', fontcolor = '#f0f0f0', style='rounded, filled']
+      tab8 [label = '@@8', fontcolor = '#f0f0f0', style='rounded, filled']
 
       # edge definitions with the node IDs
-      tab1 -> tab2
+      tab1 -> tab2 [minlen =0]
       tab2 -> tab3
       tab2 -> tab4
       tab3 -> tab5
       tab4 -> tab5
-      tab5 -> tab6
+      tab5 -> tab6 [minlen =0]
       tab6 -> tab7
       tab6 -> tab8
       }
 
       [1]: 'Study sample n=63'
-      [2]: 'Participants compleated the dual n-back task (DNB) and back-ward digit span task (BDS)'
-      [3]: 'Participants heard natural sounds n=31'
-      [4]: 'Participants heard urban sounds n=32'
-      [5]: 'Participants retook the dual n-back task (DNB) and back-ward digit span task (BDS)'
-      [6]: 'Participants gave information on whether they guessed the purpose of the experiment'
-      [7]: '17 participants guessed the purpose of the experiment'
-      [8]: '46 participants did not guess the purpose of the experiment'
+      [2]: 'Participants compleated \\nthe dual n-back task (DNB)\\n and back-ward digit span task (BDS)'
+      [3]: 'Participants heard \\nnatural sounds n=31'
+      [4]: 'Participants heard \\nurban sounds n=32'
+      [5]: 'Participants retook \\nthe dual n-back task (DNB) \\nand back-ward digit span task (BDS)'
+      [6]: 'Participants gave information\\n on whether they \\nguessed the purpose of\\n the experiment'
+      [7]: '17 participants \\nguessed the purpose \\nof the experiment'
+      [8]: '46 participants \\ndid not guess the purpose\\n of the experiment'
       ",
-      width = 1000, 
-      # height = 700
+      width = 1200, 
+      height = 700
       )
 
 ```
@@ -648,3 +649,10 @@ class: inverse, center, middle
 
 
 # An exposure to a natural soundscape improves cognitive performance on cognitive tasks when compared to urban soundscapes
+
+
+```{r, echo=F}
+# to render slides
+# rmarkdown::render(input = "slides.Rmd")
+```
+
