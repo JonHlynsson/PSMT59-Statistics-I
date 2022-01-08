@@ -610,7 +610,7 @@ text(x = 0.9, y = 1.8, labels = "The arithmetic mean value",
 
 ```
 
-As figure 1.2 shows, more uncertainty is in the *adjusted model* in comparison to the *crude model*. This result is somewhat surprising, given that naïvety was statistically controlled instead of omitting participants. However, this result can be explained by the fact that if participants **know** the purpose of the experiment, they are more likely to behave in a homogeneous manner. Thus, when we control for naïvety, participant response is more spread out. 
+As figure 1.2 shows, more uncertainty is in the *adjusted model* in comparison to the *crude model*. This result is somewhat surprising, given that naïvety was statistically controlled instead of omitting participants. However, this result can be explained by the fact that if participants **know** the purpose of the experiment, they are more likely to behave in a homogeneous manner. Thus, when we control for naïvety, participant response is unsurprisingly more spread out. 
 
 <br><br>
 
@@ -637,7 +637,7 @@ WC # Character count is 4328 and thus NOT < 4000, BUT I referenced all packages
 # However, this function counts captions. 
 
 # When the characters excluding tables and captions is counted, the character
-# count, WITH SPACES is 3452. (as stated in the instructions)
+# count, WITH SPACES is 3467. (as stated in the instructions)
 
 ## Thus the characther count is well under 4000 and there should not be a 
 #  point deduction on the grounds of extending the 3k maximum since Mats had
