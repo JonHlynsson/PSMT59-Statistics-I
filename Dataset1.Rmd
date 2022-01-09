@@ -327,7 +327,7 @@ figure1 <- ggarrange(plot_full, plot_naive, common.legend = TRUE,
 figure1
 ```
 
-As figure 1.1 shows, there's an interaction between time of testing (i.e., pre-test and post-test) that doesn't appear to differ substantially between naïve and non-naïve participants. However, larger standard errors are in the naïve group indicate *more uncertainty* in the naïve group.
+As figure 1.1 shows, there's an interaction between time of testing (i.e., pre-test and post-test)^[indicative of **carryover effects**] and type of soundscape that doesn't appear to differ substantially between naïve and non-naïve participants. However, larger standard errors are in the naïve group indicate *more uncertainty* in the naïve group.
 <br><br>
 
 
@@ -637,7 +637,7 @@ WC # Character count is 4328 and thus NOT < 4000, BUT I referenced all packages
 # However, this function counts captions. 
 
 # When the characters excluding tables and captions is counted, the character
-# count, WITH SPACES is 3467. (as stated in the instructions)
+# count, WITH SPACES is 3489. (as stated in the instructions)
 
 ## Thus the characther count is well under 4000 and there should not be a 
 #  point deduction on the grounds of extending the 3k maximum since Mats had

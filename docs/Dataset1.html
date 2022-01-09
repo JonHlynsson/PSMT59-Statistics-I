@@ -11,7 +11,7 @@
 
 <meta name="author" content="Jon Ingi Hlynsson jon.ingi.hlynsson@gmail.com" />
 
-<meta name="date" content="2022-01-08" />
+<meta name="date" content="2022-01-09" />
 
 <title>Individual assignment</title>
 
@@ -348,7 +348,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Individual assignment</h1>
 <h4 class="author">Jon Ingi Hlynsson <sub><a href="mailto:jon.ingi.hlynsson@gmail.com" class="email">jon.ingi.hlynsson@gmail.com</a><sub></h4>
-<h4 class="date">2022-01-08</h4>
+<h4 class="date">2022-01-09</h4>
 
 </div>
 
@@ -637,7 +637,7 @@ Guessed purpose of experiment
 Figure 1.1: Effects plot replicating <span class="citation">Van Hedger et al. (2019)</span>
 </p>
 </div>
-<p>As figure 1.1 shows, there’s an interaction between time of testing (i.e., pre-test and post-test) that doesn’t appear to differ substantially between naïve and non-naïve participants. However, larger standard errors are in the naïve group indicate <em>more uncertainty</em> in the naïve group.
+<p>As figure 1.1 shows, there’s an interaction between time of testing (i.e., pre-test and post-test)<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> and type of soundscape that doesn’t appear to differ substantially between naïve and non-naïve participants. However, larger standard errors are in the naïve group indicate <em>more uncertainty</em> in the naïve group.
 <br><br></p>
 </div>
 <div id="bayesian-replication" class="section level2" number="1.3">
@@ -729,8 +729,8 @@ Naïve
 <p>To better get an idea of the effect apparent in figure 1.1, soundscape type was regressed on a difference score between pre- and posttest using a Bayesian model. The results showed that participants exposed to a natural soundscape performed better on attentional measures. The data is compatible with an increase of 0.48 standardized units in performance among participants.</p>
 <p>However, since point-estimates can be deceiving, a 89% compatibility interval was calculated for the standardized improvement. The 89% cutoff was chosen as an alternative to the 95% custom because it’s a Prime number <span class="citation">(McElreath, 2020a)</span>.</p>
 <p>The data is most compatible with ranges from 0.20 to 0.74, given the data and statistical model. Thus, the data indicates that a naturalistic soundscape has the potential to affect cognitive capabilities, as measured by the <code>DNB</code> and <code>BDS</code> attentional tasks described above.</p>
-<p><span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\)</span> is a crude model and doesn’t account for participant nativity. Thus a model with naïvety and soundscape type could add accuracy to the predictions<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
-<p>However, it’s necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those who were naïve to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.
+<p><span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\)</span> is a crude model and doesn’t account for participant nativity. Thus a model with naïvety and soundscape type could add accuracy to the predictions<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>.</p>
+<p>However, it’s necessary to keep in mind that the pattern in figure 1.1 did not differ substantially between those who were naïve to the hypothesis and those who were not. Table 1.2 shows a comparison between the aforementioned models<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.
 <br><br></p>
 <div id="posterior-distribution-plots" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Posterior distribution plots</h3>
@@ -847,8 +847,9 @@ head(d_full)</code></pre>
 <li id="fn1"><p>A language and environment for statistical computing<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>See Apendix I for how the subset was derived<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>Relevant ANOVA descriptives can be found in <a href="https://jonhlynsson.github.io/PSMT59-Statistics-I/sup.html">supplementary table 1.</a><a href="#fnref3" class="footnote-back">↩︎</a></p></li>
-<li id="fn4"><p>i.e., <span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\:+\:\mathrm{Participant\:Natïvity}\)</span><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
-<li id="fn5"><p>Supplementary table 2 shows the point estimates<a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>indicative of <strong>carryover effects</strong><a href="#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>i.e., <span class="math inline">\(\mathrm{Cognitive\:Performance} \sim \mathrm{Soundscape\:Type}\:+\:\mathrm{Participant\:Natïvity}\)</span><a href="#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Supplementary table 2 shows the point estimates<a href="#fnref6" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
